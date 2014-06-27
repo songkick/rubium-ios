@@ -13,4 +13,7 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files app lib`.split("\n")
   s.platform      = Gem::Platform::RUBY
   s.require_paths = ['lib']
+  s.license       = 'MIT'
+  s.add_development_dependency 'rspec', '~> 3.0'
+  s.add_runtime_dependency 'selenium-webdriver', '~> 2.42.0'
 end
