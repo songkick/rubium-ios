@@ -88,6 +88,40 @@ describe UIAutomation::ElementArray do
     it_behaves_like "an ElementArray proxy method"
   end
   
+  describe "#with_value_for_key" do
+    let(:proxy) { subject.with_value_for_key('test-key', 'test-value') }
+    
+    it "returns an ElementArray proxy to the element array returned by UIAElement.withValueForKey(<value>, <key>)" do
+      expected = 'SomeClass.someArray().withValueForKey(\'test-value\', \'test-key\')'
+      expect(proxy).to be_remote_proxy_to(expected).of_type(UIAutomation::ElementArray)
+    end
+    
+    it_behaves_like "an ElementArray proxy method"
+  end
+  
+  it "provides a convenience method for fetching elements by their value" do
+    expected = 'SomeClass.someArray().withValueForKey(\'test-value\', \'value\')'
+    proxy = subject.with_value('test-value')
+    expect(proxy).to be_remote_proxy_to(expected).of_type(UIAutomation::ElementArray)
+  end
+  
+  describe "#first_with_value" do
+    it "returns an element proxy to the first element if at least one" do
+      length_js = 'SomeClass.someArray().withValueForKey(\'test-value\', \'value\').length'
+      allow(driver).to receive(:execute_script).with(length_js).and_return(3)
+      expected = 'SomeClass.someArray().withValueForKey(\'test-value\', \'value\')[0]'
+      proxy = subject.first_with_value('test-value')
+      expect(proxy).to be_remote_proxy_to(expected).of_type(UIAutomation::Element)
+    end
+    
+    it "returns nil if no elements exist with the given value" do
+      length_js = 'SomeClass.someArray().withValueForKey(\'test-value\', \'value\').length'
+      allow(driver).to receive(:execute_script).with(length_js).and_return(0)
+      proxy = subject.first_with_value('test-value')
+      expect(proxy).to be_nil
+    end
+  end
+  
   context "enumeration" do
     it "can be enumerated over using #each" do
       allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
