@@ -1,0 +1,66 @@
+require 'spec_helper'
+
+describe UIAutomation::Element do
+  let(:driver) { double }
+  let(:parent) { double }
+  let(:window) { double }
+
+  subject { UIAutomation::Element.new(driver, 'SomeClass.someElement()', parent, window) }
+  
+  it "exposes its parent" do
+    expect(subject.parent).to eql(parent)
+  end
+  
+  it "exposes its window" do
+    expect(subject.window).to eql(window)
+  end
+  
+  it "is valid when UIAElement.checkIsValid() is true" do
+    expect_perform('checkIsValid()', true)
+    expect(subject).to be_valid
+  end
+  
+  it "is not valid when UIAElement.checkIsValid() is false" do
+    expect_perform('checkIsValid()', false)
+    expect(subject).not_to be_valid
+  end
+  
+  it "is visible when UIAElement.isVisible() == 1" do
+    expect_perform('isVisible()', 1)
+    expect(subject).to be_visible
+  end
+  
+  it "is not visible when UIAElement.isVisible() == 0" do
+    expect_perform('isVisible()', 0)
+    expect(subject).not_to be_visible
+  end
+  
+  it "is visible when UIAElement.isEnabled() == 1" do
+    expect_perform('isEnabled()', 1)
+    expect(subject).to be_enabled
+  end
+  
+  it "is not visible when UIAElement.isEnabled() == 0" do
+    expect_perform('isEnabled()', 0)
+    expect(subject).not_to be_enabled
+  end
+  
+  it "has keyboard focus when UIAElement.hasKeyboardFocus() == 1" do
+    expect_perform('hasKeyboardFocus()', 1)
+    expect(subject.has_keyboard_focus?).to be true
+  end
+  
+  it "does not have keyboard focus when UIAElement.hasKeyboardFocus() == 0" do
+    expect_perform('hasKeyboardFocus()', 0)
+    expect(subject.has_keyboard_focus?).to be false
+  end
+  
+  it "can be tapped immediately" do
+    expect_perform('tap()')
+    subject.tap!
+  end
+  
+  def expect_perform(method, return_value = nil)
+    expect(driver).to receive(:execute_script).with("#{subject.javascript}.#{method}").and_return(return_value)
+  end
+end
