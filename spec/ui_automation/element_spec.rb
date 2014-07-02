@@ -60,18 +60,18 @@ describe UIAutomation::Element do
     subject.tap!
   end
   
-  it { is_expected.to have_array_proxy(:ancestry) }
-  it { is_expected.to have_array_proxy(:elements) }
-  it { is_expected.to have_array_proxy(:scroll_views).to(:scrollViews) }
-  it { is_expected.to have_array_proxy(:web_views).to(:webViews) }
-  it { is_expected.to have_array_proxy(:table_views).to(:tableViews).of_type(UIAutomation::TableView) }
-  it { is_expected.to have_array_proxy(:buttons) }
-  it { is_expected.to have_array_proxy(:static_texts).to(:staticTexts) }
-  it { is_expected.to have_array_proxy(:text_fields).to(:textFields).of_type(UIAutomation::TextField) }
-  it { is_expected.to have_array_proxy(:secure_text_fields).to(:secureTextFields).of_type(UIAutomation::TextField) }
-  it { is_expected.to have_array_proxy(:search_bars).to(:searchBars).of_type(UIAutomation::TextField) }
-  it { is_expected.to have_array_proxy(:segmented_controls).to(:segmentedControls) }
-  it { is_expected.to have_array_proxy(:switches) }
+  it { is_expected.to have_element_array_proxy(:ancestry) }
+  it { is_expected.to have_element_array_proxy(:elements) }
+  it { is_expected.to have_element_array_proxy(:scrollViews) }
+  it { is_expected.to have_element_array_proxy(:webViews) }
+  it { is_expected.to have_element_array_proxy(:tableViews).of_type(UIAutomation::TableView) }
+  it { is_expected.to have_element_array_proxy(:buttons) }
+  it { is_expected.to have_element_array_proxy(:staticTexts) }
+  it { is_expected.to have_element_array_proxy(:textFields).of_type(UIAutomation::TextField) }
+  it { is_expected.to have_element_array_proxy(:secureTextFields).of_type(UIAutomation::TextField) }
+  it { is_expected.to have_element_array_proxy(:searchBars).of_type(UIAutomation::TextField) }
+  it { is_expected.to have_element_array_proxy(:segmentedControls) }
+  it { is_expected.to have_element_array_proxy(:switches) }
   
   def expect_perform(method, return_value = nil)
     expect(driver).to receive(:execute_script).with("#{subject.javascript}.#{method}").and_return(return_value)

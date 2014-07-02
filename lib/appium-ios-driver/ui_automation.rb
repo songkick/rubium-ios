@@ -199,8 +199,13 @@ module UIAutomation
   
   require 'appium-ios-driver/ui_automation/element_definitions'
   
-  autoload :Element,      'appium-ios-driver/ui_automation/element'
-  autoload :ElementArray, 'appium-ios-driver/ui_automation/element_array'
-  autoload :TableView,    'appium-ios-driver/ui_automation/table_view'
-  autoload :TextField,    'appium-ios-driver/ui_automation/text_field'
+  autoload :Element,        'appium-ios-driver/ui_automation/element'
+  autoload :ElementArray,   'appium-ios-driver/ui_automation/element_array'
+  autoload :Application,    'appium-ios-driver/ui_automation/application'
+  autoload :Window,         'appium-ios-driver/ui_automation/window'
+  autoload :TableView,      'appium-ios-driver/ui_automation/table_view'
+  autoload :TabBar,         'appium-ios-driver/ui_automation/tab_bar'
+  autoload :NavigationBar,  'appium-ios-driver/ui_automation/navigation_bar'
+  autoload :TextField,      'appium-ios-driver/ui_automation/text_field'
+  autoload :Keyboard,       'appium-ios-driver/ui_automation/keyboard'
 end

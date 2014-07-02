@@ -1,6 +1,3 @@
-require 'proxies/tab_bar'
-require 'proxies/navigation_bar'
-
 module UIAutomation
   class Window < UIAutomation::Element
     has_element :tabBar, type: UIAutomation::TabBar

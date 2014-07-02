@@ -20,25 +20,25 @@ end
 
 RSpec::Matchers.alias_matcher :remote_proxy_to, :be_remote_proxy_to
 
-RSpec::Matchers.define :have_array_proxy do |proxy_method|
+RSpec::Matchers.define :have_element_array_proxy do |function|
   match do |element|
-    proxy = element.__send__(proxy_method)
+    proxy = element.__send__(@proxy_method || function.to_s.underscore)
 
-    (proxy.is_a?(UIAutomation::RemoteProxy) && 
-      matches_javascript?(proxy, element, @js_function || proxy_method) &&
+    (proxy.is_a?(UIAutomation::ElementArray) && 
+      matches_javascript?(proxy, element, function) &&
       matches_expected_type?(proxy))
-  end
-  
-  chain :to do |js_function|
-    @js_function = js_function
   end
   
   chain :of_type do |element_type|
     @element_type = element_type
   end
   
+  chain :as do |proxy_method|
+    @proxy_method = proxy_method
+  end
+  
   description do
-    "have an element array proxy for #{@js_function || proxy_method}() when calling #{proxy_method}"
+    "have an element array proxy for #{function}()"
   end
   
   def matches_javascript?(proxy, parent, function)
@@ -48,5 +48,30 @@ RSpec::Matchers.define :have_array_proxy do |proxy_method|
   def matches_expected_type?(proxy)
     expected_type = @element_type || UIAutomation::Element
     proxy.element_klass == expected_type
+  end
+end
+
+RSpec::Matchers.define :have_element_proxy do |function|
+  match do |element|
+    proxy = element.__send__(@proxy_method || function.to_s.underscore)
+
+    (proxy.is_a?(@element_type || UIAutomation::Element) && 
+      matches_javascript?(proxy, element, function))
+  end
+  
+  chain :of_type do |element_type|
+    @element_type = element_type
+  end
+  
+  chain :as do |proxy_method|
+    @proxy_method = proxy_method
+  end
+  
+  description do
+    "have an element array proxy for #{function}()"
+  end
+  
+  def matches_javascript?(proxy, parent, function)
+    proxy.to_javascript == "#{parent.to_javascript}.#{function}()"
   end
 end
