@@ -174,28 +174,16 @@ module UIAutomation
     end
   end
 
-  # require 'proxies/element_definitions'
-  # 
-  # module UIAutomation
-  #   # to avoid circular dependency
-  #   class Element < RemoteProxy
-  #     extend ElementDefinitions
-  #   end
-  # 
-  #   class NoSuchElement
-  #     def method_missing(method, *args, &block)
-  #       if UIAutomation::Element.method_defined?(method)
-  #         return nil
-  #       else
-  #         warn "Tried to call #{method} on NoSuchElement"
-  #         super
-  #       end
-  #     end
-  #   end
-  # end
-  # 
-  # require 'proxies/element_array'
-  # require 'proxies/element'
+  class NoSuchElement
+    def method_missing(method, *args, &block)
+      if UIAutomation::Element.method_defined?(method)
+        return nil
+      else
+        warn "Tried to call #{method} on NoSuchElement"
+        super
+      end
+    end
+  end
   
   require 'appium-ios-driver/ui_automation/element_definitions'
   
