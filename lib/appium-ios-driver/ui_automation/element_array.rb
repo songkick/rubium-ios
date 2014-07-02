@@ -1,6 +1,8 @@
 module UIAutomation
   class ElementArray < RemoteProxy
     include Enumerable
+    
+    attr_reader :parent, :window, :element_klass
 
     def initialize(driver, remote_object, element_klass, parent_element, window = nil)
       super driver, remote_object

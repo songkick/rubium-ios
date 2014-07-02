@@ -1,9 +1,9 @@
-require 'proxies/text_field'
-require 'proxies/table_view'
 require 'wrong'
 
 module UIAutomation
   class Element < RemoteProxy
+    extend UIAutomation::ElementDefinitions
+    
     include Wrong::Assert
     include Wrong::Eventually
     

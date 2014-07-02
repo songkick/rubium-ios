@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'appium-ios-driver/ui_automation'
 
 describe UIAutomation::RemoteProxy do
   let(:driver) { double }

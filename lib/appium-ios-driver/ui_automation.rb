@@ -33,34 +33,6 @@ module UIAutomation
       proxy_klass.new(@driver, remote_object.object_for_function(function_name, *function_args), *proxy_args)
     end
 
-    # Returns a new proxy object to a UIAElementArray. function_name must correspond to
-    # a function on the currently proxied object that returns an UIAElementArray as 
-    # defined by the Javascript API documentation.
-    #
-    # By default, the returned object will use UIAutomation::Element when creating
-    # proxies to any elements within its collection - pass a different UIAutomation::Element
-    # sub-class in as a second parameter if you want to use a specific type.
-    #
-    def element_array_proxy_for(function_name, element_klass = UIAutomation::Element)
-      proxy_for(function_name, UIAutomation::ElementArray, element_klass, self, window)
-    end
-
-    # Similar to proxy_for() but returns an instance UIAutomation::Element by default.
-    #
-    # A specific UIAutomation::Element sub-class can be passed in as an optional second
-    # parameter.
-    #
-    def element_proxy_for(function_name, klass = UIAutomation::Element)
-      proxy_for(function_name, klass, self, window)
-    end
-
-    # Alias for proxy_for(). If you need a specific sub-class of UIAutomation::Element, 
-    # you should use proxy_for() instead.
-    #
-    def [](function_name)
-      element_proxy_for(function_name)
-    end
-
     def to_s
       to_javascript
     end
@@ -212,5 +184,10 @@ module UIAutomation
   # require 'proxies/element_array'
   # require 'proxies/element'
   
-  autoload :Element, 'ui_automation/element'
+  require 'appium-ios-driver/ui_automation/element_definitions'
+  
+  autoload :Element,      'appium-ios-driver/ui_automation/element'
+  autoload :ElementArray, 'appium-ios-driver/ui_automation/element_array'
+  autoload :TableView,    'appium-ios-driver/ui_automation/table_view'
+  autoload :TextField,    'appium-ios-driver/ui_automation/text_field'
 end
