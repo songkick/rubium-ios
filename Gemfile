@@ -8,4 +8,5 @@ end
 
 group :documentation do
   gem 'inch'
+  gem 'yard'
 end
