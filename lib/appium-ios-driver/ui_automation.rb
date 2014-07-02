@@ -29,7 +29,7 @@ module UIAutomation
     # represented in the Javascript API by UIATarget.localTarget().frontMostApp().
     #
     def proxy_for(function_name, function_args: [], proxy_klass: RemoteProxy, proxy_args: [])
-      proxy_klass.new(@driver, remote_object.object_for_function(function_name, *function_args), *proxy_args)
+      build_proxy(proxy_klass, remote_object.object_for_function(function_name, *function_args), proxy_args)
     end
 
     def to_s
@@ -167,6 +167,10 @@ module UIAutomation
 
     def window
       nil
+    end
+    
+    def build_proxy(proxy_klass, remote_object, proxy_args)
+      proxy_klass.new(@driver, remote_object, *proxy_args)
     end
   end
 

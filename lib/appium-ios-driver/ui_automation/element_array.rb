@@ -1,7 +1,7 @@
 module UIAutomation
   class ElementArray < RemoteProxy
     include Enumerable
-    
+
     attr_reader :parent, :window, :element_klass
 
     def initialize(driver, remote_object, element_klass = UIAutomation::Element, parent_element = nil, window = nil)
@@ -16,35 +16,33 @@ module UIAutomation
     end
 
     def at_index(index)
-      element_proxy_for remote_object.object_for_subscript(index)
+      build_proxy element_klass, remote_object.object_for_subscript(index), [parent, window]
     end
 
     def with_name(name)
-      element_array_proxy_for remote_object.object_for_function(:withName, name)
+      element_array_proxy_for :withName, name
     end
 
     def first_with_name(name)
-      element_proxy_for remote_object.object_for_function(:firstWithName, name)
+      element_proxy_for :firstWithName, name
     end
 
     def with_predicate(template, subtitutions)
-      element_array_proxy_for remote_object.object_for_function(:withPredicate,
-        UIAutomation::PredicateString.new(template, subtitutions).to_s)
+      element_array_proxy_for :withPredicate, UIAutomation::PredicateString.new(template, subtitutions).to_s
     end
 
     def first_with_predicate(template, subtitutions)
-      element_proxy_for remote_object.object_for_function(:firstWithPredicate,
-        UIAutomation::PredicateString.new(template, subtitutions).to_s)
+      element_proxy_for :firstWithPredicate, UIAutomation::PredicateString.new(template, subtitutions).to_s
     end
-    
+
     def with_value_for_key(key, value)
-      element_array_proxy_for remote_object.object_for_function(:withValueForKey, value, key)
+      element_array_proxy_for :withValueForKey, value, key
     end
-    
+
     def with_value(value)
       with_value_for_key(:value, value)
     end
-    
+
     def first_with_value(value)
       collection = with_value(value)
       collection.any? ? collection.first : nil
@@ -72,15 +70,23 @@ module UIAutomation
         to_enum(:each)
       end
     end
-    
+
     private
 
-    def element_proxy_for(remote_object)
-      @element_klass.new(@driver, remote_object, @parent, @window)
+    def element_proxy_for(function_name, *function_args)
+      proxy_for(function_name,
+        function_args: function_args,
+        proxy_klass: @element_klass,
+        proxy_args: [parent, window]
+      )
     end
-    
-    def element_array_proxy_for(remote_object)
-      UIAutomation::ElementArray.new(@driver, remote_object, @element_klass, @parent, @window)
+
+    def element_array_proxy_for(function_name, *function_args)
+      proxy_for(function_name,
+        function_args: function_args,
+        proxy_klass: UIAutomation::ElementArray,
+        proxy_args: [element_klass, parent, window]
+      )
     end
   end
 
