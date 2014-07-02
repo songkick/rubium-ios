@@ -1,4 +1,5 @@
 require 'active_support/core_ext/string/inflections'
+require 'json'
 
 module UIAutomation
   class RemoteProxy
@@ -28,8 +29,8 @@ module UIAutomation
     # you call this method with :frontMostApp, it will return a proxy to the object
     # represented in the Javascript API by UIATarget.localTarget().frontMostApp().
     #
-    def proxy_for(function_name, klass = RemoteProxy, *args)
-      klass.new(@driver, remote_object.object_for_function(function_name), *args)
+    def proxy_for(function_name, function_args: [], proxy_klass: RemoteProxy, proxy_args: [])
+      proxy_klass.new(@driver, remote_object.object_for_function(function_name, *function_args), *proxy_args)
     end
 
     # Returns a new proxy object to a UIAElementArray. function_name must correspond to
@@ -61,14 +62,19 @@ module UIAutomation
     end
 
     def to_s
-      "<#{self.class.name}(RemoteProxy)>"
+      to_javascript
+    end
+    
+    def inspect
+      "<RemoteProxy(#{self.class.name}): #{to_javascript}>"
     end
 
     # Returns the Javascript UIAutomation API representation of the current object
     #
-    def javascript
+    def to_javascript
       @remote_object.javascript
     end
+    alias :javascript :to_javascript
 
     # Performs a function on the current Javascript object and returns the raw value.
     #
