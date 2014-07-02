@@ -1,12 +1,20 @@
 RSpec::Matchers.define :be_remote_proxy_to do |javascript|
-  @expected_type = UIAutomation::RemoteProxy
-  
   match do |proxy|
-    (proxy.is_a?(@expected_type) && proxy.javascript == javascript)
+    (matches_type?(proxy) && proxy.javascript == javascript)
   end
   
-  chain :of_type do |type|
-    @expected_type = type
+  chain :of_type do |expected_type_or_matcher|
+    @expected_type = expected_type_or_matcher
+  end
+  
+  def matches_type?(proxy)
+    expected_type_of_matcher = @expected_type || UIAutomation::RemoteProxy
+    
+    if expected_type_of_matcher.respond_to?(:matches?)
+      expected_type_of_matcher.matches?(proxy)
+    else
+      proxy.is_a?(expected_type_of_matcher)
+    end
   end
 end
 

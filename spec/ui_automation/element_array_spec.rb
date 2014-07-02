@@ -2,8 +2,10 @@ require 'spec_helper'
 
 describe UIAutomation::ElementArray do
   let(:driver) { double }
+  let(:parent) { double }
+  let(:window) { double }
 
-  subject { UIAutomation::ElementArray.new(driver, 'SomeClass.someArray()') }
+  subject { UIAutomation::ElementArray.new(driver, 'SomeClass.someArray()', UIAutomation::Element, parent, window) }
   
   it "returns element proxies of type UIAutomation::Element by default" do
     expect(subject.element_klass).to eql(UIAutomation::Element)
@@ -14,30 +16,76 @@ describe UIAutomation::ElementArray do
     expect(subject.length).to eql(3)
   end
   
-  it "returns an element proxy for an element at a specific index" do
-    proxy = subject.at_index(1)
-    expect(proxy).to be_remote_proxy_to('SomeClass.someArray()[1]').of_type(subject.element_klass)
+  describe "#at_index" do
+    let(:proxy) { subject.at_index(1) }
+    
+    it "returns an element proxy for the element returned by UIAElement.[<int>]" do
+      expect(proxy).to be_remote_proxy_to('SomeClass.someArray()[1]').of_type(subject.element_klass)
+    end
+    
+    it "can also be called using [] syntax with an integer argument" do
+      other_proxy = subject[1]
+      expect(other_proxy).to be_remote_proxy_to(proxy.to_javascript)
+    end
   end
   
-  it "supports [] syntax for fetching elements by index" do
-    proxy = subject[1]
-    expect(proxy).to be_remote_proxy_to('SomeClass.someArray()[1]').of_type(subject.element_klass)
+  describe "#first_with_name" do
+    let(:proxy) { subject.first_with_name('test') }
+    
+    it "returns an element proxy for the element returned by UIAElement.firstWithName(<name>)" do
+      expected = 'SomeClass.someArray().firstWithName(\'test\')'
+      expect(proxy).to be_remote_proxy_to(expected).of_type an_instance_of(UIAutomation::Element)
+    end
+
+    it "can also be called using [] syntax with a string argument" do
+      other_proxy = subject['test']
+      expect(other_proxy).to be_remote_proxy_to(proxy.to_javascript)
+    end
   end
   
-  it "returns an element proxy for the first element with a given name" do
-    proxy = subject.first_with_name('test')
-    expect(proxy).to be_remote_proxy_to('SomeClass.someArray().firstWithName(\'test\')').of_type(subject.element_klass)
+  describe "#first_with_predicate" do
+    let(:proxy) { subject.first_with_predicate('test like :value', value: 123) }
+    
+    it "returns an element proxy for the element returned by UIAElement.firstWithPredicate(<predicate>)" do
+      expected = 'SomeClass.someArray().firstWithPredicate(\'test like 123\')'
+      expect(proxy).to be_remote_proxy_to(expected).of_type(subject.element_klass)
+    end
   end
   
-  it "supports [] syntax for fetching elements by name" do
-    proxy = subject['test']
-    expect(proxy).to be_remote_proxy_to('SomeClass.someArray().firstWithName(\'test\')').of_type(subject.element_klass)
+  shared_examples_for "an ElementArray proxy method" do
+    it "returns an ElementArray whose element type matches the same as its own type" do
+      expect(proxy.element_klass).to eql(subject.element_klass)
+    end
+    
+    it "returns an ElementArray with the same parent as itself" do
+      expect(proxy.parent).to eql(subject.parent)
+    end
+    
+    it "returns an ElementArray with the same window as itself" do
+      expect(proxy.window).to eql(subject.window)
+    end
   end
   
-  it "returns an element proxy for the first element matching a predicate" do
-    proxy = subject.first_with_predicate('test like :value', value: 123)
-    expected = 'SomeClass.someArray().firstWithPredicate(\'test like 123\')'
-    expect(proxy).to be_remote_proxy_to(expected).of_type(subject.element_klass)
+  describe "#with_name" do
+    let(:proxy) { subject.with_name('test') }
+    
+    it "returns an ElementArray proxy to the element array returned by UIAElement.withName(<name>)" do
+      expected = 'SomeClass.someArray().withName(\'test\')'
+      expect(proxy).to be_remote_proxy_to(expected).of_type(UIAutomation::ElementArray)
+    end
+    
+    it_behaves_like "an ElementArray proxy method"
+  end
+  
+  describe "#with_predicate" do
+    let(:proxy) { subject.with_predicate('test like :value', value: 123) }
+    
+    it "returns an ElementArray proxy to the element array returned by UIAElement.withPredicate(<predicate>)" do
+      expected = 'SomeClass.someArray().withPredicate(\'test like 123\')'
+      expect(proxy).to be_remote_proxy_to(expected).of_type(UIAutomation::ElementArray)
+    end
+    
+    it_behaves_like "an ElementArray proxy method"
   end
   
   it "can be enumerated over using #each" do
