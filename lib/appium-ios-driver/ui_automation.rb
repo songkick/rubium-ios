@@ -209,4 +209,5 @@ module UIAutomation
   autoload :TextField,      'appium-ios-driver/ui_automation/text_field'
   autoload :Keyboard,       'appium-ios-driver/ui_automation/keyboard'
   autoload :Target,         'appium-ios-driver/ui_automation/target'
+  autoload :Logger,         'appium-ios-driver/ui_automation/logger'
 end
