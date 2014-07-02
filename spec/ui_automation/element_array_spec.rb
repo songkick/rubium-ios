@@ -88,37 +88,39 @@ describe UIAutomation::ElementArray do
     it_behaves_like "an ElementArray proxy method"
   end
   
-  it "can be enumerated over using #each" do
-    allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
-    
-    proxies = []
-    subject.each { |proxy| proxies << proxy }
+  context "enumeration" do
+    it "can be enumerated over using #each" do
+      allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
 
-    expect(proxies).to contain_exactly(
-      remote_proxy_to('SomeClass.someArray()[0]').of_type(subject.element_klass),
-      remote_proxy_to('SomeClass.someArray()[1]').of_type(subject.element_klass),
-      remote_proxy_to('SomeClass.someArray()[2]').of_type(subject.element_klass)
-    )
-  end
-  
-  it "returns an enumerator when calling #each without a block" do
-    allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
+      proxies = []
+      subject.each { |proxy| proxies << proxy }
 
-    expect(subject.each.to_a).to contain_exactly(
-      remote_proxy_to('SomeClass.someArray()[0]').of_type(subject.element_klass),
-      remote_proxy_to('SomeClass.someArray()[1]').of_type(subject.element_klass),
-      remote_proxy_to('SomeClass.someArray()[2]').of_type(subject.element_klass)
-    )
-  end
-  
-  it "supports Enumerable (using #map as an example)" do
-    allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
+      expect(proxies).to contain_exactly(
+        remote_proxy_to('SomeClass.someArray()[0]').of_type(subject.element_klass),
+        remote_proxy_to('SomeClass.someArray()[1]').of_type(subject.element_klass),
+        remote_proxy_to('SomeClass.someArray()[2]').of_type(subject.element_klass)
+      )
+    end
 
-    expect(subject.map(&:to_javascript)).to include(
-      'SomeClass.someArray()[0]',
-      'SomeClass.someArray()[1]',
-      'SomeClass.someArray()[2]'
-    )
+    it "returns an enumerator when calling #each without a block" do
+      allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
+
+      expect(subject.each.to_a).to contain_exactly(
+        remote_proxy_to('SomeClass.someArray()[0]').of_type(subject.element_klass),
+        remote_proxy_to('SomeClass.someArray()[1]').of_type(subject.element_klass),
+        remote_proxy_to('SomeClass.someArray()[2]').of_type(subject.element_klass)
+      )
+    end
+
+    it "supports Enumerable (using #map as an example)" do
+      allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
+
+      expect(subject.map(&:to_javascript)).to include(
+        'SomeClass.someArray()[0]',
+        'SomeClass.someArray()[1]',
+        'SomeClass.someArray()[2]'
+      )
+    end
   end
 end
 
