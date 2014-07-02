@@ -4,15 +4,15 @@ module UIAutomation
     
     attr_reader :parent, :window, :element_klass
 
-    def initialize(driver, remote_object, element_klass, parent_element, window = nil)
+    def initialize(driver, remote_object, element_klass = UIAutomation::Element, parent_element = nil, window = nil)
       super driver, remote_object
       @element_klass = element_klass
       @parent = parent_element
       @window = window
     end
 
-    def to_s
-      "<#{self.class.name}(#{@element_klass})>"
+    def inspect
+      "<RemoteProxy(#{self.class.name}) type:#{element_proxy_for}: #{to_javascript}>"
     end
 
     def at_index(index)
@@ -64,8 +64,12 @@ module UIAutomation
     end
 
     def each(&block)
-      (0...length).each do |index|
-        yield self[index]
+      if block_given?
+        (0...length).each do |index|
+          yield self[index]
+        end
+      else
+        to_enum(:each)
       end
     end
     
