@@ -14,7 +14,12 @@ Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
   s.require_paths = ['lib']
   s.license       = 'MIT'
+
+  # developer dependencies
   s.add_development_dependency 'rspec', '~> 3.0'
+  s.add_development_dependency 'rake', '~> 10.0'
+
+  # runtime dependencies (used to generate Gemfile)
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.42.0'
   s.add_runtime_dependency 'activesupport', '~> 4.0'
 end
