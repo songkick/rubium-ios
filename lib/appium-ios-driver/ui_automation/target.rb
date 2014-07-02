@@ -1,5 +1,3 @@
-require 'proxies/application'
-
 module UIAutomation
   class Target < RemoteProxy
     def self.local_target(driver)
@@ -7,11 +5,11 @@ module UIAutomation
     end
     
     def front_most_app
-      proxy_for(:frontMostApp, UIAutomation::Application)
+      proxy_for(:frontMostApp, proxy_klass: UIAutomation::Application)
     end
     
-    def set_location(coordinates)
-      setLocation(coordinates)
+    def location=(coordinates)
+      set_location(coordinates)
     end
     
     # Performs a tap on the element by tapping at the position

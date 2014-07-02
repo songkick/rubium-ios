@@ -208,4 +208,5 @@ module UIAutomation
   autoload :NavigationBar,  'appium-ios-driver/ui_automation/navigation_bar'
   autoload :TextField,      'appium-ios-driver/ui_automation/text_field'
   autoload :Keyboard,       'appium-ios-driver/ui_automation/keyboard'
+  autoload :Target,         'appium-ios-driver/ui_automation/target'
 end
