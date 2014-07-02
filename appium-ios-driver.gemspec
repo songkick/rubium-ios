@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
   s.add_development_dependency 'rspec', '~> 3.0'
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.42.0'
+  s.add_runtime_dependency 'activesupport', '~> 4.0'
 end
