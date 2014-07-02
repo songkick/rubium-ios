@@ -9,10 +9,9 @@ module UIAutomation
       attr_accessor :debug_on_exception
     end
 
-    def initialize(driver, remote_object)
+    def initialize(driver, remote_object_or_string)
       @driver = driver
-      @remote_object = remote_object
-      raise "Remote object cannot be a string!" if remote_object.is_a?(String)
+      @remote_object = remote_object_from(remote_object_or_string)
     end
 
     def self.from_javascript(driver, javascript, *args)
@@ -141,6 +140,16 @@ module UIAutomation
     end
 
     private
+    
+    def remote_object_from(remote_object_or_string)
+      if remote_object_or_string.is_a?(String)
+        RemoteJavascriptObject.new(remote_object_or_string)
+      elsif remote_object_or_string.is_a?(RemoteJavascriptObject)
+        remote_object_or_string
+      else
+        raise TypeError.new("Remote object must be a RemoteJavascriptObject or String, but was #{remote_object_or_string.class}")
+      end
+    end
 
     # We override method_missing so you can dynamically call methods that correspond to 
     # methods in the Javascript API without having to explicitly call perform().
