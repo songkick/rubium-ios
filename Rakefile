@@ -6,4 +6,9 @@ RSpec::Core::RakeTask.new(:specs) do |t|
   t.rspec_opts = '--color'
 end
 
+namespace :docs do
+  desc "Reports documentation coverage using inch"
+  task(:coverage) { sh "bundle exec inch" }
+end
+
 task :default => :specs
