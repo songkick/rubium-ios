@@ -185,17 +185,17 @@ module UIAutomation
     end
   end
   
-  require 'appium-ios-driver/ui_automation/element_definitions'
+  require 'ui_automation/element_definitions'
   
-  autoload :Element,        'appium-ios-driver/ui_automation/element'
-  autoload :ElementArray,   'appium-ios-driver/ui_automation/element_array'
-  autoload :Application,    'appium-ios-driver/ui_automation/application'
-  autoload :Window,         'appium-ios-driver/ui_automation/window'
-  autoload :TableView,      'appium-ios-driver/ui_automation/table_view'
-  autoload :TabBar,         'appium-ios-driver/ui_automation/tab_bar'
-  autoload :NavigationBar,  'appium-ios-driver/ui_automation/navigation_bar'
-  autoload :TextField,      'appium-ios-driver/ui_automation/text_field'
-  autoload :Keyboard,       'appium-ios-driver/ui_automation/keyboard'
-  autoload :Target,         'appium-ios-driver/ui_automation/target'
-  autoload :Logger,         'appium-ios-driver/ui_automation/logger'
+  autoload :Element,        'ui_automation/element'
+  autoload :ElementArray,   'ui_automation/element_array'
+  autoload :Application,    'ui_automation/application'
+  autoload :Window,         'ui_automation/window'
+  autoload :TableView,      'ui_automation/table_view'
+  autoload :TabBar,         'ui_automation/tab_bar'
+  autoload :NavigationBar,  'ui_automation/navigation_bar'
+  autoload :TextField,      'ui_automation/text_field'
+  autoload :Keyboard,       'ui_automation/keyboard'
+  autoload :Target,         'ui_automation/target'
+  autoload :Logger,         'ui_automation/logger'
 end
