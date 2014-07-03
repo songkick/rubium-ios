@@ -1,3 +1,5 @@
+require 'selenium-webdriver'
+
 module Appium
   class Session
     attr_reader :driver

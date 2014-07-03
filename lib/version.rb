@@ -1,5 +1,5 @@
 module Appium
-  module IOSDriver
+  module Gem
     VERSION = "0.0.1"
   end
 end

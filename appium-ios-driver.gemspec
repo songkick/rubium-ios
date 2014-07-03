@@ -5,7 +5,7 @@ require 'version'
 
 Gem::Specification.new do |s|
   s.name          = "appium-ios-driver"
-  s.version       = Appium::IOSDriver::VERSION
+  s.version       = Appium::Gem::VERSION
   s.authors       = ["Luke Redpath"]
   s.email         = ["luke@lukeredpath.co.uk"]
   s.homepage      = "https://github.com/lukeredpath/appium-ios-driver"

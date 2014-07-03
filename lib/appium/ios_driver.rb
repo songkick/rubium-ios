@@ -1,3 +1,5 @@
+require 'appium/session'
+
 module Appium
   class IOSDriver
     attr_accessor :implicit_timeout
