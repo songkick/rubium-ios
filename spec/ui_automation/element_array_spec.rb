@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe UIAutomation::ElementArray do
-  let(:driver) { double }
+  let(:executor) { double }
   let(:parent) { double }
   let(:window) { double }
 
-  subject { UIAutomation::ElementArray.new(driver, 'SomeClass.someArray()', UIAutomation::Element, parent, window) }
+  subject { UIAutomation::ElementArray.new(executor, 'SomeClass.someArray()', UIAutomation::Element, parent, window) }
   
   it "returns element proxies of type UIAutomation::Element by default" do
     expect(subject.element_klass).to eql(UIAutomation::Element)
   end
   
   it "returns the number of elements in the array" do
-    allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
+    allow(executor).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
     expect(subject.length).to eql(3)
   end
   
@@ -108,7 +108,7 @@ describe UIAutomation::ElementArray do
   describe "#first_with_value" do
     it "returns an element proxy to the first element if at least one" do
       length_js = 'SomeClass.someArray().withValueForKey(\'test-value\', \'value\').length'
-      allow(driver).to receive(:execute_script).with(length_js).and_return(3)
+      allow(executor).to receive(:execute_script).with(length_js).and_return(3)
       expected = 'SomeClass.someArray().withValueForKey(\'test-value\', \'value\')[0]'
       proxy = subject.first_with_value('test-value')
       expect(proxy).to be_remote_proxy_to(expected).of_type(UIAutomation::Element)
@@ -116,7 +116,7 @@ describe UIAutomation::ElementArray do
     
     it "returns nil if no elements exist with the given value" do
       length_js = 'SomeClass.someArray().withValueForKey(\'test-value\', \'value\').length'
-      allow(driver).to receive(:execute_script).with(length_js).and_return(0)
+      allow(executor).to receive(:execute_script).with(length_js).and_return(0)
       proxy = subject.first_with_value('test-value')
       expect(proxy).to be_nil
     end
@@ -124,7 +124,7 @@ describe UIAutomation::ElementArray do
   
   context "enumeration" do
     it "can be enumerated over using #each" do
-      allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
+      allow(executor).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
 
       proxies = []
       subject.each { |proxy| proxies << proxy }
@@ -137,7 +137,7 @@ describe UIAutomation::ElementArray do
     end
 
     it "returns an enumerator when calling #each without a block" do
-      allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
+      allow(executor).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
 
       expect(subject.each.to_a).to contain_exactly(
         remote_proxy_to('SomeClass.someArray()[0]').of_type(subject.element_klass),
@@ -147,7 +147,7 @@ describe UIAutomation::ElementArray do
     end
 
     it "supports Enumerable (using #map as an example)" do
-      allow(driver).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
+      allow(executor).to receive(:execute_script).with('SomeClass.someArray().length').and_return(3)
 
       expect(subject.map(&:to_javascript)).to include(
         'SomeClass.someArray()[0]',

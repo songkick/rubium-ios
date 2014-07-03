@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe UIAutomation::Element do
-  let(:driver) { double }
+  let(:executor) { double }
   let(:parent) { double }
   let(:window) { double }
 
-  subject { UIAutomation::Element.new(driver, 'SomeClass.someElement()', parent, window) }
+  subject { UIAutomation::Element.new(executor, 'SomeClass.someElement()', parent, window) }
   
   it "exposes its parent" do
     expect(subject.parent).to eql(parent)
@@ -74,6 +74,6 @@ describe UIAutomation::Element do
   it { is_expected.to have_element_array_proxy(:switches) }
   
   def expect_perform(method, return_value = nil)
-    expect(driver).to receive(:execute_script).with("#{subject.javascript}.#{method}").and_return(return_value)
+    expect(executor).to receive(:execute_script).with("#{subject.javascript}.#{method}").and_return(return_value)
   end
 end

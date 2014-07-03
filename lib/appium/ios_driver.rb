@@ -88,15 +88,19 @@ module Appium
     end
 
     def target
-      @target ||= UIAutomation::Target.local_target(driver)
+      @target ||= UIAutomation::Target.local_target(self)
     end
 
     def logger
-      @logger ||= UIAutomation::Logger.logger(driver)
+      @logger ||= UIAutomation::Logger.logger(self)
     end
 
     def front_most_app
       target.proxy_for(:frontMostApp)
+    end
+    
+    def execute_script(script)
+      driver.execute_script(script)
     end
 
     private
@@ -104,7 +108,7 @@ module Appium
     def update_implicit_timeout(value)
       driver.manage.timeouts.implicit_wait = value if @session
     end
-
+    
     def driver
       raise "You must call #launch to start a session first!" unless @session
       @session.driver

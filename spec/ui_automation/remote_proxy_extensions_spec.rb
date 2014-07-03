@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe UIAutomation::RemoteProxy, "(element proxy extensions)" do
-  let(:driver) { double }
+  let(:executor) { double }
 
-  subject { UIAutomation::RemoteProxy.from_javascript(driver, 'SomeClass.someObject()') }
+  subject { UIAutomation::RemoteProxy.from_javascript(executor, 'SomeClass.someObject()') }
   
   it "can return a remote element proxy" do
     proxy = subject.element_proxy_for(:someElement)
@@ -44,8 +44,8 @@ describe UIAutomation::RemoteProxy, "(element proxy extensions)" do
       allow(subject).to receive(:window).and_return(window)
     end
     
-    it "uses the same driver as the parent proxy" do
-      expect(driver).to receive(:execute_script).with(element_proxy.javascript)
+    it "uses the same executor as the parent proxy" do
+      expect(executor).to receive(:execute_script).with(element_proxy.javascript)
       element_proxy.execute_self
     end
     
@@ -66,8 +66,8 @@ describe UIAutomation::RemoteProxy, "(element proxy extensions)" do
       allow(subject).to receive(:window).and_return(window)
     end
     
-    it "uses the same driver as the parent proxy" do
-      expect(driver).to receive(:execute_script).with(element_array_proxy.javascript)
+    it "uses the same executor as the parent proxy" do
+      expect(executor).to receive(:execute_script).with(element_array_proxy.javascript)
       element_array_proxy.execute_self
     end
     

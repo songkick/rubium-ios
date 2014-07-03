@@ -9,17 +9,17 @@ module UIAutomation
       attr_accessor :debug_on_exception
     end
 
-    def initialize(driver, remote_object_or_string)
-      @driver = driver
+    def initialize(executor, remote_object_or_string)
+      @executor = executor
       @remote_object = remote_object_from(remote_object_or_string)
     end
 
-    def self.from_javascript(driver, javascript, *args)
-      new(driver, RemoteJavascriptObject.new(javascript), *args)
+    def self.from_javascript(executor, javascript, *args)
+      new(executor, RemoteJavascriptObject.new(javascript), *args)
     end
 
-    def self.from_element_id(driver, element_id, *args)
-      new(driver, RemoteObjectByElementID.new(element_id), *args)
+    def self.from_element_id(executor, element_id, *args)
+      new(executor, RemoteObjectByElementID.new(element_id), *args)
     end
 
     # Returns a new proxy object to the object returned from the method that corresponds
@@ -56,21 +56,21 @@ module UIAutomation
     # proxy objects above instead to return a new proxy to that object.
     #
     def perform(function, *args)
-      @driver.execute_script(remote_object.object_for_function(function, *args).javascript)
+      @executor.execute_script(remote_object.object_for_function(function, *args).javascript)
     rescue StandardError => e
       binding.pry if self.class.debug_on_exception
       raise "Error performing javascript: #{javascript} (server error: #{e})"
     end
 
     def fetch(property)
-      @driver.execute_script(remote_object.object_for_property(property).javascript)
+      @executor.execute_script(remote_object.object_for_property(property).javascript)
     rescue StandardError => e
       binding.pry if self.class.debug_on_exception
       raise "Error performing javascript: #{javascript} (server error: #{e})"
     end
 
     def execute_self
-      @driver.execute_script(remote_object.javascript)
+      @executor.execute_script(remote_object.javascript)
     end
 
     # Represents a remote javascript object using raw javascript, e.g.
@@ -170,7 +170,7 @@ module UIAutomation
     end
     
     def build_proxy(proxy_klass, remote_object, proxy_args)
-      proxy_klass.new(@driver, remote_object, *proxy_args)
+      proxy_klass.new(@executor, remote_object, *proxy_args)
     end
   end
 
