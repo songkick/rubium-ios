@@ -3,8 +3,6 @@ require 'json'
 
 module UIAutomation
   class RemoteProxy
-    attr_reader :remote_object
-
     class << self
       attr_accessor :debug_on_exception
     end
@@ -171,6 +169,10 @@ module UIAutomation
 
     def window
       nil
+    end
+    
+    def remote_object
+      @remote_object
     end
     
     def build_proxy(proxy_klass, remote_object, proxy_args)
