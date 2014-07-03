@@ -9,7 +9,7 @@ module Appium
       client.timeout = timeout
 
       @driver = Selenium::WebDriver.for(:remote,
-        desired_capabilities: capabilities,
+        desired_capabilities: capabilities.to_hash,
         url: "http://#{host}:#{port}#{Appium.root_path}",
         http_client: client
       )

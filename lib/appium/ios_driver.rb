@@ -3,6 +3,8 @@ require 'appium/session'
 module Appium
   class IOSDriver
     attr_accessor :implicit_timeout
+    
+    DEFAULT_SESSION_TIMEOUT = 30
 
     def initialize(capabilities, host = Appium.default_host, port = Appium.default_port)
       @capabilities = capabilities
@@ -16,7 +18,7 @@ module Appium
       update_implicit_timeout(implicit_timeout)
     end
 
-    def launch(session_timeout = 30)
+    def launch(session_timeout = DEFAULT_SESSION_TIMEOUT)
       @session ||= Appium::Session.new(@host, @port, @capabilities, session_timeout)
       update_implicit_timeout(implicit_timeout)
       self.native_timeout = implicit_timeout
@@ -27,9 +29,9 @@ module Appium
       @session = nil
     end
 
-    def with_session(&block)
+    def with_session(session_timeout = DEFAULT_SESSION_TIMEOUT, &block)
       raise "Session already running!" if @session
-      launch
+      launch(session_timeout)
       yield @session if block_given?
       quit
     end
