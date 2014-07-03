@@ -19,11 +19,6 @@ describe UIAutomation::RemoteProxy, "(element proxy extensions)" do
     expect { subject.element_proxy_for(:someElement, Object) }.to raise_error(TypeError)
   end
   
-  it "supports [] syntax as a way of getting an element proxy" do
-    proxy = subject[:someElement]
-    expect(proxy).to be_remote_proxy_to('SomeClass.someObject().someElement()').of_type(UIAutomation::Element)
-  end
-  
   it "can return an element array proxy of UIAutomation::Element types" do
     proxy = subject.element_array_proxy_for(:someElements)
     expect(proxy).to be_remote_proxy_to('SomeClass.someObject().someElements()').of_type(UIAutomation::ElementArray)

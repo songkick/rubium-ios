@@ -68,6 +68,10 @@ module UIAutomation
       binding.pry if self.class.debug_on_exception
       raise "Error performing javascript: #{javascript} (server error: #{e})"
     end
+    
+    def [](property)
+      fetch(property)
+    end
 
     def execute_self
       @executor.execute_script(remote_object.javascript)

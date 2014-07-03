@@ -19,6 +19,11 @@ describe UIAutomation::RemoteProxy do
     expect(subject.fetch(:someProperty)).to eql('value')
   end
   
+  it "can fetch a property on the remote object using [] syntax" do
+    expect(executor).to receive(:execute_script).with('SomeClass.someObject().someProperty').and_return('value')
+    expect(subject[:someProperty]).to eql('value')
+  end
+  
   it "can perform a function on the remote object without arguments" do
     expect(executor).to receive(:execute_script).with('SomeClass.someObject().someFunction()')
     subject.perform(:someFunction)

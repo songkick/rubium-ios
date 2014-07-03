@@ -28,13 +28,6 @@ module UIAutomation
         proxy_args: [self, window]
       )
     end
-
-    # Alias for proxy_for(). If you need a specific sub-class of UIAutomation::Element, 
-    # you should use proxy_for() instead.
-    #
-    def [](function_name)
-      element_proxy_for(function_name)
-    end
   end
   
   class RemoteProxy
