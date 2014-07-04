@@ -2,28 +2,34 @@ require 'active_support/core_ext/string/inflections'
 
 module UIAutomation
   module ElementDefinitions
-    # Defines a method on an element object that returns another element object.
+    # Defines a method on an returns an element proxy.
     #
     # By default, the Javascript method name is underscored (e.g. textField => text_field)
     # and the element returned is generic (UIAutomation::Element).
     #
-    # Options:
-    # => :type -> (Class) The defined method returns an instance of this class instead.
-    # => :as   -> (Symbol) An alternative name to use for the Ruby method name.
+    # @example Define a method 'text_field' that returns a proxy to <self>.textField()
+    #   has_element :textField
     #
+    # @param [Hash] opts options for defining the method
+    # @option opts [Symbol] :as     Use a custom Ruby method name
+    # @option opts [Class]  :type   Return a specific UIAutomation::Element sub-class
+    # @api private
     def has_element(js_method_name, opts={})
       define_element_using(:element_proxy_for, js_method_name, opts)
     end
     
-    # Defines a method that returns an element array (UIAutomation::ElementArray).
+    # Defines a method that returns an element array proxy.
     #
     # By default, the Javascript method name is underscored (e.g. textFields => text_fields)
-    # and the element array returns generic elements (UIAutomation::Element).
+    # and the element array contains generic elements (UIAutomation::Element).
     #
-    # Options:
-    # => :type -> (Class) The ElementArray will return elements of this type.
-    # => :as   -> (Symbol) An alternative name to use for the Ruby method name.
+    # @example Define a method 'text_fields' that returns a proxy to <self>.textFields() 
+    #   has_element :textFields
     #
+    # @param [Hash] opts options for defining the method
+    # @option opts [Symbol] :as     Use a custom Ruby method name
+    # @option opts [Class]  :type   Return elements with this specific UIAutomation::Element sub-class
+    # @api private
     def has_element_array(js_method_name, opts={})
       define_element_using(:element_array_proxy_for, js_method_name, opts)
     end

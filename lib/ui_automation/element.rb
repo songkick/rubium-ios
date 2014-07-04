@@ -1,6 +1,9 @@
 require 'wrong'
 
 module UIAutomation
+  # Represents objects of type UIAElement in the Javascript API.
+  #
+  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAElementClassReference/UIAElement/UIAElement.html#//apple_ref/doc/uid/TP40009903 Apple UIAElement Documentation
   class Element < RemoteProxy
     extend UIAutomation::ElementDefinitions
     

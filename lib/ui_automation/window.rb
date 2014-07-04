@@ -1,22 +1,54 @@
 module UIAutomation
   class Window < UIAutomation::Element
+    # @!group Elements
+
+    # The main tab bar.
+    #
+    # On an iPhone there will normally only be one tab bar but an iPad may have multiple.
     has_element :tabBar, type: UIAutomation::TabBar
-    has_element :navigationBar, type: UIAutomation::NavigationBar
-    has_element :toolbar
-    has_element_array :tabBars, type: UIAutomation::TabBar
-    has_element_array :navigationBars, type: UIAutomation::NavigationBar
-    has_element_array :toolbars
     
+    # The main navigation bar.
+    #
+    # On an iPhone there will normally only be one navigation bar but an iPad may have multiple.
+    has_element :navigationBar, type: UIAutomation::NavigationBar
+    
+    # The main toolbar.
+    # 
+    # On an iPhone there will normally only be one toolbar but an iPad may have multiple.
+    has_element :toolbar
+    
+    # The first UITableView in the view hierarchy
+    # @return [UIAutomation::TableView]
+    #
     def main_table_view
       table_views[0]
     end
-    
+
+    # The first UIWebView in the view hierarchy
+    # @return [UIAutomation::Element]
+    #
     def main_web_view
       scroll_views[0].web_views[0]
     end
     
+    # @!endgroup
+    
+    # @!group Element Collections
+    
+    # The window's tab bars
+    has_element_array :tabBars, type: UIAutomation::TabBar
+    
+    # The window's navigation bars
+    has_element_array :navigationBars, type: UIAutomation::NavigationBar
+    
+    # The window's toolbars
+    has_element_array :toolbars
+    
+    # @return [self] 
     def window
       self
     end
+
+    # @!endgroup
   end
 end

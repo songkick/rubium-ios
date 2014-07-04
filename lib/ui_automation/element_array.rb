@@ -1,4 +1,11 @@
 module UIAutomation
+  # Represents objects of type UIAElementArray in the Javascript API.
+  #
+  # An ElementArray represents a collection of elements of a specific type within the view hierarchy.
+  #
+  # This class implements #each and includes the Enumerable mixin, enabling you to use it like any other
+  # native Ruby collection class.
+  #
   class ElementArray < RemoteProxy
     include Enumerable
 
