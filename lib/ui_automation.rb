@@ -115,8 +115,8 @@ module UIAutomation
     # this will simply return an empty hash. Use `#proxy_for` to return  a new proxy to 
     # another Javascript object instead.
     #
-    # @param [Symbol] The name of the Javascript method to call on the object represented by self
-    # @param [args] A list of arguments to be passed to the Javascript method
+    # @param [Symbol] function The name of the Javascript method to call on the object represented by self
+    # @param [args] args A list of arguments to be passed to the Javascript method
     # @see #method_missing 
     #
     def perform(function, *args)
@@ -128,7 +128,7 @@ module UIAutomation
 
     # Fetches the value of the named property on the current Javascript object.
     #
-    # @param [Symbol] The name of the property to return 
+    # @param [Symbol] property The name of the property to return 
     # @return [Object] The Ruby equivalent of whatever the Javascript method returns.
     #
     def fetch(property)
@@ -152,7 +152,7 @@ module UIAutomation
     
     # @!endgroup
     
-    # @!begingroup Debugging
+    # @!group Debugging
     
     # Returns the Javascript representation
     # @return [String]
