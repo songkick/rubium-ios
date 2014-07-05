@@ -209,9 +209,7 @@ module UIAutomation
         case arg
           when String, Symbol
             "'#{arg}'"
-          when Hash
-            arg.to_json
-          when Array
+          when Hash, Array
             arg.to_json
           else
             arg
