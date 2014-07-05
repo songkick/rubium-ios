@@ -5,7 +5,7 @@ describe UIAutomation::Element do
   let(:parent) { double }
   let(:window) { double }
 
-  subject { UIAutomation::Element.new(executor, 'SomeClass.someElement()', parent, window) }
+  subject { UIAutomation::Element.new(executor, '<element>', parent, window) }
   
   it "exposes its parent" do
     expect(subject.parent).to eql(parent)
@@ -60,18 +60,18 @@ describe UIAutomation::Element do
     subject.tap!
   end
   
-  it { is_expected.to have_element_array_proxy(:ancestry) }
-  it { is_expected.to have_element_array_proxy(:elements) }
-  it { is_expected.to have_element_array_proxy(:scrollViews) }
-  it { is_expected.to have_element_array_proxy(:webViews) }
-  it { is_expected.to have_element_array_proxy(:tableViews).of_type(UIAutomation::TableView) }
-  it { is_expected.to have_element_array_proxy(:buttons) }
-  it { is_expected.to have_element_array_proxy(:staticTexts) }
-  it { is_expected.to have_element_array_proxy(:textFields).of_type(UIAutomation::TextField) }
-  it { is_expected.to have_element_array_proxy(:secureTextFields).of_type(UIAutomation::TextField) }
-  it { is_expected.to have_element_array_proxy(:searchBars).of_type(UIAutomation::TextField) }
-  it { is_expected.to have_element_array_proxy(:segmentedControls) }
-  it { is_expected.to have_element_array_proxy(:switches) }
+  it { should have_proxy(:ancestry).to_element_array(".ancestry()") }
+  it { should have_proxy(:elements).to_element_array(".elements()") }
+  it { should have_proxy(:scroll_views).to_element_array(".scrollViews()") }
+  it { should have_proxy(:web_views).to_element_array(".webViews()") }
+  it { should have_proxy(:table_views).to_element_array(".tableViews()").of_type(UIAutomation::TableView) }
+  it { should have_proxy(:buttons).to_element_array(".buttons()") }
+  it { should have_proxy(:static_texts).to_element_array(".staticTexts()") }
+  it { should have_proxy(:text_fields).to_element_array(".textFields()").of_type(UIAutomation::TextField) }
+  it { should have_proxy(:secure_text_fields).to_element_array(".secureTextFields()").of_type(UIAutomation::TextField) }
+  it { should have_proxy(:search_bars).to_element_array(".searchBars()").of_type(UIAutomation::TextField) }
+  it { should have_proxy(:segmented_controls).to_element_array(".segmentedControls()") }
+  it { should have_proxy(:switches).to_element_array(".switches()") }
   
   def expect_perform(method, return_value = nil)
     expect(executor).to receive(:execute_script).with("#{subject.javascript}.#{method}").and_return(return_value)
