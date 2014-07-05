@@ -5,15 +5,12 @@ describe UIAutomation::Target, '.local_target' do
   
   subject { UIAutomation::Target.local_target(executor) }
   
-  it "returns a proxy to UIATarget.localTarget()" do
+  it "is a proxy to UIATarget.localTarget()" do
     expect(subject.to_javascript).to eql("UIATarget.localTarget()")
   end
   
-  it "returns an Application proxy for the front-most app" do
-    expected = 'UIATarget.localTarget().frontMostApp()'
-    expect(subject.front_most_app).to be_remote_proxy_to(expected).of_type(UIAutomation::Application)
-  end
-  
+  it { should have_proxy(:front_most_app).to('.frontMostApp()').of_type(UIAutomation::Application) }
+
   it "can perform a tap on an element using its rect" do
     rect = {x: 0, y: 0, width: 100, height: 100}
     element = double(rect: rect)

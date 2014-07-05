@@ -22,22 +22,27 @@ RSpec::Matchers.alias_matcher :remote_proxy_to, :be_remote_proxy_to
 
 RSpec::Matchers.define :have_proxy do |proxy_method|
   match do |proxy|
-    @expected_type ||= UIAutomation::Element
-
     if @element_array
       has_element_array_proxy?(proxy, proxy_method)
     else
       has_element_proxy?(proxy, proxy_method)
     end
   end
+  
+  chain :to do |javascript = default_javascript_for(proxy_method)|
+    @expected_javascript = javascript
+    @expected_type = UIAutomation::RemoteProxy
+  end
 
   chain :to_element do |javascript = default_javascript_for(proxy_method)|
     @expected_javascript = javascript
+    @expected_type = UIAutomation::Element
   end
 
   chain :to_element_array do |javascript = default_javascript_for(proxy_method)|
     @element_array = true
     @expected_javascript = javascript
+    @expected_type = UIAutomation::Element
   end
 
   chain :of_type do |element_type|
