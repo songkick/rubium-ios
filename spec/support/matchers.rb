@@ -31,11 +31,11 @@ RSpec::Matchers.define :have_proxy do |proxy_method|
     end
   end
 
-  chain :to_element do |javascript|
+  chain :to_element do |javascript = default_javascript_for(proxy_method)|
     @expected_javascript = javascript
   end
 
-  chain :to_element_array do |javascript|
+  chain :to_element_array do |javascript = default_javascript_for(proxy_method)|
     @element_array = true
     @expected_javascript = javascript
   end
@@ -80,5 +80,9 @@ RSpec::Matchers.define :have_proxy do |proxy_method|
   def expected_proxy_description
     proxy_description = @element_array ? "UIAutomation::ElementArray<#{@expected_type}>" : @expected_type
     "#{@expected_javascript} (#{proxy_description})"
+  end
+  
+  def default_javascript_for(proxy_method)
+    ".#{proxy_method}()"
   end
 end
