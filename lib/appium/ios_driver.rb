@@ -69,10 +69,6 @@ module Appium
       driver.find_element(:xpath, "//UIAKeyboard")
     end
 
-    def execute(script)
-      driver.execute_script(script)
-    end
-
     def find(xpath)
       element_proxy_for driver.find_element(:xpath, xpath)
     rescue Selenium::WebDriver::Error::NoSuchElementError => e
@@ -102,6 +98,7 @@ module Appium
     def execute_script(script)
       driver.execute_script(script)
     end
+    alias :execute :execute_script
 
     private
 
