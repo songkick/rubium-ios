@@ -61,7 +61,7 @@ module UIAutomation
       @remote_object = remote_object_from(remote_object_or_string)
     end
     
-    # @!group Factory methods
+    ### @!group Factory methods
 
     # Returns a new RemoteProxy instance from a string of Javascript.
     #
@@ -83,9 +83,9 @@ module UIAutomation
       new(executor, RemoteObjectByElementID.new(element_id), *args)
     end
     
-    # @!endgroup
+    ### @!endgroup
     
-    # @!group Proxy Methods    
+    ### @!group Proxy Methods    
 
     # Returns a new proxy to the Javascript object returned from the method called on the object
     # represented by self.
@@ -150,9 +150,9 @@ module UIAutomation
       @executor.execute_script(remote_object.javascript)
     end
     
-    # @!endgroup
+    ### @!endgroup
     
-    # @!group Debugging
+    ### @!group Debugging
     
     # Returns the Javascript representation
     # @return [String]
@@ -174,7 +174,7 @@ module UIAutomation
     end
     alias :javascript :to_javascript
     
-    # @!endgroup
+    ### @!endgroup
 
     # Represents a remote javascript object using raw javascript, e.g.
     # to represent the main application, you would initialize this with 

@@ -4,7 +4,7 @@ module UIAutomation
   # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAWindowClassReference/
   #
   class Window < UIAutomation::Element
-    # @!group Elements
+    ### @!group Elements
 
     # The main tab bar.
     #
@@ -35,9 +35,9 @@ module UIAutomation
       scroll_views[0].web_views[0]
     end
     
-    # @!endgroup
+    ### @!endgroup
     
-    # @!group Element Collections
+    ### @!group Element Collections
     
     # The window's tab bars
     has_element_array :tabBars, type: UIAutomation::TabBar
@@ -48,7 +48,7 @@ module UIAutomation
     # The window's toolbars
     has_element_array :toolbars
     
-    # @!endgroup
+    ### @!endgroup
     
     # @return [self] 
     def window

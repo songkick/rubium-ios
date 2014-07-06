@@ -38,7 +38,7 @@ module UIAutomation
       "<RemoteProxy(#{self.class.name}) type:#{element_proxy_for}: #{to_javascript}>"
     end
     
-    # @!group Accessing Elements    
+    ### @!group Accessing Elements    
 
     # Returns a proxy to the element at the given index.
     # 
@@ -154,7 +154,7 @@ module UIAutomation
       end
     end
     
-    # @!endgroup
+    ### @!endgroup
 
     # Returns the number of items in the array
     # @return [Integer]

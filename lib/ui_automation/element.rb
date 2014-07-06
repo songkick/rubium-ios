@@ -21,7 +21,7 @@ module UIAutomation
     # @return [UIAutomation::Window]
     attr_reader :window
 
-    # @!group Element Collections
+    ### @!group Element Collections
 
     # The element's parents
     has_element_array :ancestry
@@ -59,7 +59,7 @@ module UIAutomation
     # All switches contained by this element
     has_element_array :switches
 
-    # @!endgroup
+    ### @!endgroup
 
     # Initializes a new element.
     # As well as the parameters of its super-class, it also takes a parent element and window proxy.
@@ -71,7 +71,7 @@ module UIAutomation
       @window = window
     end
 
-    # @!group Checking Element State
+    ### @!group Checking Element State
 
     # Returns true if the element is valid.
     # This uses the UIAElement method checkIsValid() to ensure that the most up-to-date status is returned.
@@ -169,9 +169,9 @@ module UIAutomation
       end
     end
     
-    # @!endgroup
+    ### @!endgroup
     
-    # @!group Gestures and Actions
+    ### @!group Gestures and Actions
 
     # Perform a single tap on the element.
     # This method waits for the element to become valid and visible before performing the tap.
@@ -190,7 +190,7 @@ module UIAutomation
       perform(:tap)
     end
 
-    # @!endgroup
+    ### @!endgroup
 
     def application
       window.parent

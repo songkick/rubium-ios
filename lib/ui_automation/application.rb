@@ -6,7 +6,7 @@ module UIAutomation
   class Application < RemoteProxy
     extend ElementDefinitions
     
-    # @!group Elements
+    ### @!group Elements
 
     # The application's main window.
     has_element :mainWindow, type: UIAutomation::Window
@@ -17,14 +17,14 @@ module UIAutomation
     # The system keyboard.
     has_element :keyboard, type: UIAutomation::Keyboard
     
-    # @!endgroup
+    ### @!endgroup
     
-    # @!group Element Collections
+    ### @!group Element Collections
     
     # The application's windows.
     has_element_array :windows, type: UIAutomation::Window
 
-    # @!endgroup
+    ### @!endgroup
     
   end
 end
