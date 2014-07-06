@@ -26,5 +26,8 @@ module UIAutomation
 
     ### @!endgroup
     
+    def bundle_id
+      perform :bundleID
+    end    
   end
 end
