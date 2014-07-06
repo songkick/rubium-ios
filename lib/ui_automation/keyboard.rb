@@ -1,11 +1,9 @@
 module UIAutomation
   class Keyboard < UIAutomation::Element
+    has_element_array :keys
+    
     def type(string)
       perform :typeString, string
-    end
-    
-    def keys
-      element_array_proxy_for(:keys)
     end
     
     def done_button
