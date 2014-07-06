@@ -1,7 +1,8 @@
 module UIAutomation
   # A RemoteProxy to UIAApplication objects in the Javascript API.
   #
-  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAApplicationClassReference/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009899 Aple UIAApplication Documentation
+  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAApplicationClassReference/
+  #
   class Application < RemoteProxy
     extend ElementDefinitions
     

@@ -3,7 +3,9 @@ require 'wrong'
 module UIAutomation
   # Represents objects of type UIAElement in the Javascript API.
   #
-  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAElementClassReference/UIAElement/UIAElement.html#//apple_ref/doc/uid/TP40009903 Apple UIAElement Documentation
+  # UIAutomation::Element acts as the base class for all element types.
+  #
+  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAElementClassReference/
   class Element < RemoteProxy
     extend UIAutomation::ElementDefinitions
 
@@ -125,7 +127,7 @@ module UIAutomation
     #
     # @param [List<Symbol>] predicates One or more symbols representing boolean methods defined on the current class.
     # @yieldparam [self] element
-    # @raises [Wrong::Assert::AssertionFailedError] if all predicates do not return true within the default timeout.
+    # @raise [Wrong::Assert::AssertionFailedError] if all predicates do not return true within the default timeout.
     #
     # @example Tap the element once it is selected and has keyboard focus
     #     element.when_element(:selected?, :has_keyboard_focus?) { |el| el.tap }
@@ -151,7 +153,7 @@ module UIAutomation
     #
     # @param [List<Symbol>] predicates One or more symbols representing boolean methods defined on the current class.
     # @yieldparam [self] element
-    # @raises [Wrong::Assert::AssertionFailedError] if all predicates do not return true within the default timeout.
+    # @raise [Wrong::Assert::AssertionFailedError] if all predicates do not return true within the default timeout.
     #
     # @example Scroll the table view until a specific cell is visible
     #     expected_cell = table_view.cells['Some Name']

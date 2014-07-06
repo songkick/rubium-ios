@@ -6,6 +6,7 @@ module UIAutomation
   # This class implements #each and includes the Enumerable mixin, enabling you to use it like any other
   # native Ruby collection class.
   #
+  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAElementArrayClassReference/
   class ElementArray < RemoteProxy
     include Enumerable
 

@@ -1,4 +1,8 @@
 module UIAutomation
+  # A RemoteProxy to UIALogger objects in the Javascript API.
+  #
+  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIALoggerClassReference/
+  #
   class Logger < RemoteProxy
     def self.logger(driver)
       from_javascript(driver, 'UIALogger')

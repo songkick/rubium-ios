@@ -1,4 +1,8 @@
 module UIAutomation
+  # A RemoteProxy to UIAWindow objects in the Javascript API.
+  #
+  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAWindowClassReference/
+  #
   class Window < UIAutomation::Element
     # @!group Elements
 

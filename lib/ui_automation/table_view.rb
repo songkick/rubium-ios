@@ -1,4 +1,8 @@
 module UIAutomation
+  # A RemoteProxy to UIATableView objects in the Javascript API.
+  #
+  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIATableViewClassReference/
+  #
   class TableView < UIAutomation::Element
     has_element_array :cells
     has_element_array :visibleCells
