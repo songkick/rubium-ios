@@ -44,11 +44,11 @@ module UIAutomation
     # The window's toolbars
     has_element_array :toolbars
     
+    # @!endgroup
+    
     # @return [self] 
     def window
       self
     end
-
-    # @!endgroup
   end
 end
