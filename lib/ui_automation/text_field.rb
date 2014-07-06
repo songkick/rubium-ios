@@ -13,8 +13,9 @@ module UIAutomation
     # @param [String] value the text to use as the text field's new value
     #
     def text=(value)
-      tap unless has_keyboard_focus?
-      perform :setValue, value
+      with_keyboard_focus do
+        perform :setValue, value
+      end
     end
     
     # Begins typing in the text field using the on-screen keyboard
@@ -38,8 +39,7 @@ module UIAutomation
     # @yieldparam [UIAutomation::Keyboard] keyboard the keyboard proxy
     #
     def begin_typing(&block)
-      tap unless has_keyboard_focus?
-      when_element(:has_keyboard_focus?) do
+      with_keyboard_focus do
         application.keyboard.when_element(:visible?) do
           yield application.keyboard if block_given?
         end
@@ -47,5 +47,12 @@ module UIAutomation
     end
     
     ### @!endgroup
+    
+    private
+    
+    def with_keyboard_focus(&block)
+      tap unless has_keyboard_focus?
+      when_element(:has_keyboard_focus?, &block)
+    end
   end
 end
