@@ -2,13 +2,16 @@ require 'rspec'
 
 unless ENV['TM_FILEPATH']
   require 'simplecov'
-  SimpleCov.start unless ENV['skip_coverage']
-
   require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start if ENV['CODECLIMATE_REPO_TOKEN']
+  require 'coveralls'
+
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    Coveralls::SimpleCov::Formatter,
+    SimpleCov::Formatter::HTMLFormatter,
+    CodeClimate::TestReporter::Formatter
+  ]
   
-  # require 'coveralls'
-  # Coveralls.wear!
+  SimpleCov.start unless ENV['skip_coverage']
 end
 
 RSpec.configure do |config|
