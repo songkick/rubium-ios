@@ -1,5 +1,7 @@
 # UIAutomation for Appium
 
+[![Build Status](https://travis-ci.org/songkick/appium-ios-driver.svg?branch=master)](https://travis-ci.org/songkick/appium-ios-driver)
+
 ```
 gem install appium-ios-driver
 ```
