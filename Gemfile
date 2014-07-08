@@ -19,4 +19,5 @@ end
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
+  gem "coveralls", require: nil
 end

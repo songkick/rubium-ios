@@ -6,6 +6,9 @@ unless ENV['TM_FILEPATH']
 
   require "codeclimate-test-reporter"
   CodeClimate::TestReporter.start if ENV['CODECLIMATE_REPO_TOKEN']
+  
+  require 'coveralls'
+  Coveralls.wear!
 end
 
 RSpec.configure do |config|
