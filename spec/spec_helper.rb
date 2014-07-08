@@ -1,7 +1,12 @@
 require 'rspec'
-require 'simplecov'
 
-SimpleCov.start unless ENV['TM_FILEPATH']
+unless ENV['TM_FILEPATH']
+  require 'simplecov'
+  SimpleCov.start unless ENV['skip_coverage']
+
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start if ENV['CODECLIMATE_REPO_TOKEN']
+end
 
 RSpec.configure do |config|
 end
