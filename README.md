@@ -8,6 +8,8 @@
 gem install appium-ios-driver
 ```
 
+[API documentation (master)](http://rubydoc.info/github/songkick/appium-ios-driver/master/frames)
+
 ## Introduction
 
 Appium iOS Driver is an alternative Ruby library for use with [Appium](http://appium.io) and is aimed specifically at the iOS platform (Appium itself supports multiple platforms).
