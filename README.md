@@ -1,7 +1,8 @@
 # UIAutomation for Appium
 
-[![Build Status](https://travis-ci.org/songkick/appium-ios-driver.svg?branch=master)](https://travis-ci.org/songkick/appium-ios-driver)
-[![Code Climate](https://codeclimate.com/github/songkick/appium-ios-driver.png)](https://codeclimate.com/github/songkick/appium-ios-driver)
+[![Build Status](http://img.shields.io/travis/songkick/appium-ios-driver.svg?style=flat)](https://travis-ci.org/songkick/appium-ios-driver)
+[![Code Climate](http://img.shields.io/codeclimate/github/songkick/appium-ios-driver.svg?style=flat)](https://codeclimate.com/github/songkick/appium-ios-driver)
+[![Coverage Status](http://img.shields.io/coveralls/songkick/appium-ios-driver.svg?style=flat)](https://coveralls.io/r/songkick/appium-ios-driver)
 
 ```
 gem install appium-ios-driver
