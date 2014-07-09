@@ -1,4 +1,8 @@
 module UIAutomation
+  # A RemoteProxy to UIAPopover objects in the Javascript API.
+  #
+  # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAPopoverClassReference/
+  #
   class Popover < Element
     ### @!group Elements
 
