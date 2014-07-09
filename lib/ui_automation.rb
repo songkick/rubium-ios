@@ -311,4 +311,5 @@ module UIAutomation
   autoload :Popover,        'ui_automation/popover'
   autoload :TextView,       'ui_automation/text_view'
   autoload :ActivityView,   'ui_automation/activity_view'
+  autoload :ActionSheet,    'ui_automation/action_sheet'
 end
