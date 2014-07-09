@@ -93,10 +93,6 @@ module Appium
     def logger
       @logger ||= UIAutomation::Logger.logger(self)
     end
-
-    def front_most_app
-      target.proxy_for(:frontMostApp)
-    end
     
     def execute_script(script)
       driver.execute_script(script)
