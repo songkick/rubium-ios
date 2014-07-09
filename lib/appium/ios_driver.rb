@@ -68,10 +68,6 @@ module Appium
       target.popTimeout
     end
 
-    def wait_for_keyboard
-      driver.find_element(:xpath, "//UIAKeyboard")
-    end
-
     def find(xpath)
       element_proxy_for driver.find_element(:xpath, xpath)
     rescue Selenium::WebDriver::Error::NoSuchElementError => e
