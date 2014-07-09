@@ -1,5 +1,5 @@
 module UIAutomation
   class ActionSheet < Element
-    has_element :cancelButton
+    include Traits::Cancellable
   end
 end
