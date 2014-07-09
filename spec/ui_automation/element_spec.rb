@@ -72,6 +72,17 @@ describe UIAutomation::Element do
   it { should have_proxy(:search_bars).to_element_array(".searchBars()").of_type(UIAutomation::TextField) }
   it { should have_proxy(:segmented_controls).to_element_array(".segmentedControls()") }
   it { should have_proxy(:switches).to_element_array }
+  it { should have_proxy(:activity_indicators).to_element_array(".activityIndicators()") }
+  it { should have_proxy(:activity_view).to_element(".activityView()").of_type(UIAutomation::ActivityView) }
+  it { should have_proxy(:collection_views).to_element_array(".collectionViews()") }
+  it { should have_proxy(:images).to_element_array }
+  it { should have_proxy(:links).to_element_array }
+  it { should have_proxy(:page_indicators).to_element_array(".pageIndicators()") }
+  it { should have_proxy(:pickers).to_element_array.of_type(UIAutomation::Picker) }
+  it { should have_proxy(:popover).to_element.of_type(UIAutomation::Popover) }
+  it { should have_proxy(:progress_indicators).to_element_array('.progressIndicators()') }
+  it { should have_proxy(:sliders).to_element_array }
+  it { should have_proxy(:text_views).to_element_array('.textViews()').of_type(UIAutomation::TextView) }
   
   def expect_perform(method, return_value = nil)
     expect(executor).to receive(:execute_script).with("#{subject.javascript}.#{method}").and_return(return_value)

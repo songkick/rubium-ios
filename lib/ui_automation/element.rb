@@ -36,7 +36,7 @@ module UIAutomation
     has_element_array :webViews
 
     # All table views contained by this element
-    has_element_array :tableViews,       type: UIAutomation::TableView
+    has_element_array :tableViews, type: UIAutomation::TableView
 
     # All buttons contained by this element
     has_element_array :buttons
@@ -45,19 +45,52 @@ module UIAutomation
     has_element_array :staticTexts
 
     # All text fields contained by this element
-    has_element_array :textFields,       type: UIAutomation::TextField
+    has_element_array :textFields, type: UIAutomation::TextField
 
     # All secure text fields contained by this element
     has_element_array :secureTextFields, type: UIAutomation::TextField
 
     # All search bars contained by this element
-    has_element_array :searchBars,       type: UIAutomation::TextField
+    has_element_array :searchBars, type: UIAutomation::TextField
 
     # All segmented controls contained by this element
     has_element_array :segmentedControls
 
     # All switches contained by this element
     has_element_array :switches
+    
+    # All images contained by this element
+    has_element_array :images
+    
+    # All links contained by this element
+    has_element_array :links
+    
+    # All page indicators contained by this element
+    has_element_array :pageIndicators
+    
+    # All pickers contained by this element
+    has_element_array :pickers, type: UIAutomation::Picker
+    
+    # The popover object associated with the current element
+    has_element :popover, type: UIAutomation::Popover
+    
+    # All progress indicators contained by this element
+    has_element_array :progressIndicators
+    
+    # All sliders contained by this element
+    has_element_array :sliders
+    
+    # All text views contained by this element
+    has_element_array :textViews, type: UIAutomation::TextView
+    
+    # All collection views contained by this element
+    has_element_array :collectionViews
+    
+    # The activity view associated with this element
+    has_element :activityView, type: UIAutomation::ActivityView
+    
+    # All actvity indicators associated with this element
+    has_element_array :activityIndicators
 
     ### @!endgroup
 

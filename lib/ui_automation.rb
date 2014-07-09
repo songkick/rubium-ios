@@ -307,4 +307,8 @@ module UIAutomation
   autoload :Keyboard,       'ui_automation/keyboard'
   autoload :Target,         'ui_automation/target'
   autoload :Logger,         'ui_automation/logger'
+  autoload :Picker,         'ui_automation/picker'
+  autoload :Popover,        'ui_automation/popover'
+  autoload :TextView,       'ui_automation/text_view'
+  autoload :ActivityView,   'ui_automation/activity_view'
 end
