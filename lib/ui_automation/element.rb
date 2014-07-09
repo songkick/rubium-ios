@@ -91,6 +91,30 @@ module UIAutomation
     
     # All actvity indicators associated with this element
     has_element_array :activityIndicators
+    
+    # The main tab bar.
+    #
+    # On an iPhone there will normally only be one tab bar but an iPad may have multiple.
+    has_element :tabBar, type: UIAutomation::TabBar
+    
+    # The main navigation bar.
+    #
+    # On an iPhone there will normally only be one navigation bar but an iPad may have multiple.
+    has_element :navigationBar, type: UIAutomation::NavigationBar
+    
+    # The main toolbar.
+    # 
+    # On an iPhone there will normally only be one toolbar but an iPad may have multiple.
+    has_element :toolbar
+    
+    # The window's tab bars
+    has_element_array :tabBars, type: UIAutomation::TabBar
+    
+    # The window's navigation bars
+    has_element_array :navigationBars, type: UIAutomation::NavigationBar
+    
+    # The window's toolbars
+    has_element_array :toolbars
 
     ### @!endgroup
 
