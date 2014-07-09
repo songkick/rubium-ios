@@ -1,5 +1,7 @@
 module UIAutomation
   module Traits
+    # Defines methods for elements that support text entry using the system keyboard.
+    #
     module TextInput
       ### @!group Actions    
 
