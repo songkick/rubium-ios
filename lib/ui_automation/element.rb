@@ -20,6 +20,31 @@ module UIAutomation
     # The window that contains this element
     # @return [UIAutomation::Window]
     attr_reader :window
+    
+    ### @!group Elements
+    
+    # The popover object associated with the current element
+    has_element :popover, type: UIAutomation::Popover
+    
+    # The activity view associated with this element
+    has_element :activityView, type: UIAutomation::ActivityView
+    
+    # The main tab bar.
+    #
+    # On an iPhone there will normally only be one tab bar but an iPad may have multiple.
+    has_element :tabBar, type: UIAutomation::TabBar
+    
+    # The main navigation bar.
+    #
+    # On an iPhone there will normally only be one navigation bar but an iPad may have multiple.
+    has_element :navigationBar, type: UIAutomation::NavigationBar
+    
+    # The main toolbar.
+    # 
+    # On an iPhone there will normally only be one toolbar but an iPad may have multiple.
+    has_element :toolbar
+    
+    # @!endgroup
 
     ### @!group Element Collections
 
@@ -71,9 +96,6 @@ module UIAutomation
     # All pickers contained by this element
     has_element_array :pickers, type: UIAutomation::Picker
     
-    # The popover object associated with the current element
-    has_element :popover, type: UIAutomation::Popover
-    
     # All progress indicators contained by this element
     has_element_array :progressIndicators
     
@@ -86,26 +108,8 @@ module UIAutomation
     # All collection views contained by this element
     has_element_array :collectionViews
     
-    # The activity view associated with this element
-    has_element :activityView, type: UIAutomation::ActivityView
-    
     # All actvity indicators associated with this element
     has_element_array :activityIndicators
-    
-    # The main tab bar.
-    #
-    # On an iPhone there will normally only be one tab bar but an iPad may have multiple.
-    has_element :tabBar, type: UIAutomation::TabBar
-    
-    # The main navigation bar.
-    #
-    # On an iPhone there will normally only be one navigation bar but an iPad may have multiple.
-    has_element :navigationBar, type: UIAutomation::NavigationBar
-    
-    # The main toolbar.
-    # 
-    # On an iPhone there will normally only be one toolbar but an iPad may have multiple.
-    has_element :toolbar
     
     # The window's tab bars
     has_element_array :tabBars, type: UIAutomation::TabBar

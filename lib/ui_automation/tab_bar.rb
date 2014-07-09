@@ -11,8 +11,11 @@ module UIAutomation
 
     ### @!endgroup
 
-    alias :tabs :buttons
-    alias :selected_tab :selected_button
+    def tabs
+      buttons
+    end
+    
+    alias_method :selected_tab, :selected_button
 
     ### @!group Actions
 
