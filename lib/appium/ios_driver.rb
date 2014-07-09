@@ -114,6 +114,7 @@ module Appium
       'UIASecureTextField'  => UIAutomation::TextField,
       'UIASearchBar'        => UIAutomation::TextField,
       'UIAWindow'           => UIAutomation::Window,
+      'UIANavigationBar'    => UIAutomation::NavigationBar
     }
 
     def element_proxy_for(element)
