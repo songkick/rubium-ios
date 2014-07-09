@@ -312,6 +312,7 @@ module UIAutomation
   autoload :TextView,       'ui_automation/text_view'
   autoload :ActivityView,   'ui_automation/activity_view'
   autoload :ActionSheet,    'ui_automation/action_sheet'
+  autoload :Alert,          'ui_automation/alert'
   
   module Traits
     autoload :Cancellable,  'ui_automation/traits/cancellable'

@@ -17,6 +17,30 @@ module UIAutomation
     # The system keyboard.
     has_element :keyboard, type: UIAutomation::Keyboard
     
+    # The currently displayed alert view
+    has_element :alert, type: UIAutomation::Alert
+    
+    # The currently displayed editing menu
+    has_element :editingMenu
+    
+    # The application's tab bar.
+    #
+    # On an iPhone there will normally only be one tab bar but an iPad may have multiple.
+    has_element :tabBar, type: UIAutomation::TabBar
+    
+    # The application's navigation bar.
+    #
+    # On an iPhone there will normally only be one navigation bar but an iPad may have multiple.
+    has_element :navigationBar, type: UIAutomation::NavigationBar
+    
+    # The application's toolbar.
+    # 
+    # On an iPhone there will normally only be one toolbar but an iPad may have multiple.
+    has_element :toolbar
+    
+    # The application status bar
+    has_element :statusBar
+    
     ### @!endgroup
     
     ### @!group Element Collections
