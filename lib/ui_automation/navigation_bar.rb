@@ -3,7 +3,7 @@ module UIAutomation
   #
   # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIANavigationBarClassReference/
   #
-  class NavigationBar < UIAutomation::Element
+  class NavigationBar < Element
     ### @!group Elements
 
     # The navigation bar's left button

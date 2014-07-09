@@ -3,7 +3,7 @@ module UIAutomation
   #
   # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIATextFieldClassReference/
   #
-  class TextField < UIAutomation::Element
+  class TextField < Element
     ### @!group Actions    
     
     # Sets the text of the text field directly, bypassing the keyboard.

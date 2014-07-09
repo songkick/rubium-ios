@@ -3,7 +3,7 @@ module UIAutomation
   #
   # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAKeyboardClassReference/
   #
-  class Keyboard < UIAutomation::Element
+  class Keyboard < Element
     ### @!group Element Collections
 
     # The keyboard's keys

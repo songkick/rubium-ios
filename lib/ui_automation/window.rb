@@ -3,7 +3,7 @@ module UIAutomation
   #
   # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAWindowClassReference/
   #
-  class Window < UIAutomation::Element
+  class Window < Element
     ### @!group Elements
     
     # The first UITableView in the view hierarchy

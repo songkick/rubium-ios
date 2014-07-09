@@ -3,7 +3,7 @@ module UIAutomation
   #
   # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIATabBarClassReference/
   #
-  class TabBar < UIAutomation::Element
+  class TabBar < Element
     ### @!group Elements
 
     # The currently selected tab

@@ -3,7 +3,7 @@ module UIAutomation
   #
   # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIATableViewClassReference/
   #
-  class TableView < UIAutomation::Element
+  class TableView < Element
     ### @!group Element Collections
 
     # All of the cells in the table view
