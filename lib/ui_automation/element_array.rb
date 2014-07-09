@@ -80,13 +80,13 @@ module UIAutomation
     #     array.with_predicate("name beginswith :value", :value => 'test')
     # 
     # @param [String] template a predicate template using NSPredicate syntax
-    # @param [Hash] substitution an optional hash of template substitutions
+    # @param [Hash] substitutions an optional hash of template substitutions
     # @return [UIAutomation::ElementArray] a sub-set of the current element array
     # @see UIAElementArray.withPredicate()
     # @see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html
     #
-    def with_predicate(template, subtitutions = {})
-      element_array_proxy_for :withPredicate, UIAutomation::PredicateString.new(template, subtitutions).to_s
+    def with_predicate(template, substitutions = {})
+      element_array_proxy_for :withPredicate, UIAutomation::PredicateString.new(template, substitutions).to_s
     end
 
     # Returns a proxy to the first element matching the specified predicate.
@@ -94,13 +94,13 @@ module UIAutomation
     # Predicates use the Apple NSPredicate syntax (see #with_predicate for more information).
     #
     # @param [String] template a predicate template using NSPredicate syntax
-    # @param [Hash] substitution an optional hash of template substitutions
+    # @param [Hash] substitutions an optional hash of template substitutions
     # @return [UIAutomation::Element] the element proxy
     # @see #with_predicate
     # @see UIAElementArray.firstWithPredicate()
     #
-    def first_with_predicate(template, subtitutions = {})
-      element_proxy_for :firstWithPredicate, UIAutomation::PredicateString.new(template, subtitutions).to_s
+    def first_with_predicate(template, substitutions = {})
+      element_proxy_for :firstWithPredicate, UIAutomation::PredicateString.new(template, substitutions).to_s
     end
 
     # Returns a new ElementArray containing all elements with the given key/value pair.
