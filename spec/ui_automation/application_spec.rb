@@ -4,7 +4,7 @@ describe UIAutomation::Application do
   subject { UIAutomation::Application.new(double, '<application>') }
   
   it { should have_proxy(:main_window).to_element('.mainWindow()').of_type(UIAutomation::Window) }
-  it { should have_proxy(:action_sheet).to_element(".actionSheet()") }
+  it { should have_proxy(:action_sheet).to_element(".actionSheet()").of_type(UIAutomation::ActionSheet) }
   it { should have_proxy(:keyboard).to_element.of_type(UIAutomation::Keyboard)}
   it { should have_proxy(:windows).to_element_array.of_type(UIAutomation::Window) }
 end

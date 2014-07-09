@@ -12,7 +12,7 @@ module UIAutomation
     has_element :mainWindow, type: UIAutomation::Window
     
     # The currently active action sheet.
-    has_element :actionSheet
+    has_element :actionSheet, type: UIAutomation::ActionSheet
     
     # The system keyboard.
     has_element :keyboard, type: UIAutomation::Keyboard
