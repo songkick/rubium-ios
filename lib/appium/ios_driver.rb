@@ -32,8 +32,11 @@ module Appium
     def with_session(session_timeout = DEFAULT_SESSION_TIMEOUT, &block)
       raise "Session already running!" if @session
       launch(session_timeout)
-      yield @session if block_given?
-      quit
+      begin
+        yield @session if block_given?
+      ensure
+        quit
+      end
     end
 
     def relaunch
