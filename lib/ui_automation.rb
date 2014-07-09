@@ -315,5 +315,6 @@ module UIAutomation
   
   module Traits
     autoload :Cancellable,  'ui_automation/traits/cancellable'
+    autoload :TextInput,    'ui_automation/traits/text_input'
   end
 end
