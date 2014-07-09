@@ -114,7 +114,12 @@ module Appium
       'UIASecureTextField'  => UIAutomation::TextField,
       'UIASearchBar'        => UIAutomation::TextField,
       'UIAWindow'           => UIAutomation::Window,
-      'UIANavigationBar'    => UIAutomation::NavigationBar
+      'UIANavigationBar'    => UIAutomation::NavigationBar,
+      'UIAActionSheet'      => UIAutomation::ActionSheet,
+      'UIAActivityView'     => UIAutomation::ActivityView,
+      'UIAPicker'           => UIAutomation::Picker,
+      'UIAPopover'          => UIAutomation::Popover,
+      'UIATextView'         => UIAutomation::TextView
     }
 
     def element_proxy_for(element)
