@@ -1,14 +1,14 @@
 # Rubium: iOS Automation using Ruby and Appium
 
-[![Build Status](http://img.shields.io/travis/songkick/appium-ios-driver.svg?style=flat)](https://travis-ci.org/songkick/appium-ios-driver)
-[![Code Climate](http://img.shields.io/codeclimate/github/songkick/appium-ios-driver.svg?style=flat)](https://codeclimate.com/github/songkick/appium-ios-driver)
-[![Coverage Status](http://img.shields.io/coveralls/songkick/appium-ios-driver.svg?style=flat)](https://coveralls.io/r/songkick/appium-ios-driver)
+[![Build Status](http://img.shields.io/travis/songkick/rubium-ios.svg?style=flat)](https://travis-ci.org/songkick/rubium-ios)
+[![Code Climate](http://img.shields.io/codeclimate/github/songkick/rubium-ios.svg?style=flat)](https://codeclimate.com/github/songkick/rubium-ios)
+[![Coverage Status](http://img.shields.io/coveralls/songkick/rubium-ios.svg?style=flat)](https://coveralls.io/r/songkick/rubium-ios)
 
 ```
 gem install rubium-ios
 ```
 
-[API documentation (master)](http://rubydoc.info/github/songkick/appium-ios-driver/master/frames)
+[API documentation (master)](http://rubydoc.info/github/songkick/rubium-ios/master/frames)
 
 ## Introduction
 
