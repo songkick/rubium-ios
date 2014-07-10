@@ -31,7 +31,6 @@ if (tabBar.selectedButton().name() != destinationScreen) {
 The same could be written in Ruby:
 
 ```ruby
-driver = ...
 target = driver.target
 app = target.front_most_app
 tab_bar = app.main_window.tab_bar
