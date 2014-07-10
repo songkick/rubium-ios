@@ -112,7 +112,7 @@ module Appium
     # @see UIATarget.setTimeout()
     # 
     def native_timeout=(new_timeout)
-      target.setTimeout(new_timeout)
+      target.set_timeout(new_timeout)
     end
 
     # Temporarily sets the native Javascript API implicit timeout by pushing a new
@@ -123,9 +123,9 @@ module Appium
     # @see UIATarget.pushTimeout(), UIATarget.popTimeout()
     #
     def with_native_timeout(value, &block)
-      target.pushTimeout(value)
+      target.push_timeout(value)
       yield if block_given?
-      target.popTimeout
+      target.pop_timeout
     end
     
     # Performs an explicit wait until the given block returns true.
