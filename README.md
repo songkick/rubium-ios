@@ -1,18 +1,18 @@
-# UIAutomation for Appium
+# Rubium: iOS Automation using Ruby and Appium
 
 [![Build Status](http://img.shields.io/travis/songkick/appium-ios-driver.svg?style=flat)](https://travis-ci.org/songkick/appium-ios-driver)
 [![Code Climate](http://img.shields.io/codeclimate/github/songkick/appium-ios-driver.svg?style=flat)](https://codeclimate.com/github/songkick/appium-ios-driver)
 [![Coverage Status](http://img.shields.io/coveralls/songkick/appium-ios-driver.svg?style=flat)](https://coveralls.io/r/songkick/appium-ios-driver)
 
 ```
-gem install appium-ios-driver
+gem install rubium-ios
 ```
 
 [API documentation (master)](http://rubydoc.info/github/songkick/appium-ios-driver/master/frames)
 
 ## Introduction
 
-Appium iOS Driver is an alternative Ruby library for use with [Appium](http://appium.io) and is aimed specifically at the iOS platform (Appium itself supports multiple platforms).
+Rubium is an alternative Ruby library for use with [Appium](http://appium.io) and is aimed specifically at the iOS platform (Appium itself supports multiple platforms).
 
 Rather than using XPaths or other element selector mechanisms, this library allows you to write automated test scripts using a Ruby mirror of the [official Apple UIAutomation API](https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/_index.html).
 
@@ -45,7 +45,7 @@ The above example could be written using identical method names to the Javascrip
 
 This means if you know how to use UIAutomation, you know how to use this library.
 
-## Using Appium iOS Driver in depth
+## Using Rubium in depth
 
 Before you get started, you need a compiled version of your app and the Appium server running. Setting up Appium is outside the scope of this tutorial but you can follow the [Appium Getting Started guide](http://appium.io/getting-started.html?lang=en) to get you up and running. The quickest way to get up and running is to download the Appium.app self-contained bundle.
 
