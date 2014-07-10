@@ -225,7 +225,7 @@ Whenever you're dealing with elements using the proxy API, native timeouts shoul
 
 ### Explicit timeouts
 
-The final type of timeout you might use is an explicit timeout. Explicit timeouts work in the same way as implicit timeouts except as the name suggests, they are used explicitly. Like implicit timeouts, explicit timeouts will repeatedly execute a block of code until a timeout is reached. 
+The final type of timeout you might use is an explicit wait. Explicit timeouts work in the same way as implicit timeouts except as the name suggests, they are used explicitly. Like implicit timeouts, explicit timeouts will repeatedly execute a block of code until a timeout is reached. 
 
 Unlike implicit timeouts, explicit timeouts can be used with any block of code, including calls to the Javascript proxy API. Native timeouts are the preferred way of interacting with elements that might not yet be on screen however there may be occasions where you want your script to explicitly wait for an element to be in a certain state. If this is the case, you can use an explicit timeout:
 
@@ -233,13 +233,13 @@ Unlike implicit timeouts, explicit timeouts can be used with any block of code, 
 # explicitly wait until an element is visible
 window = driver.target.front_most_app.main_window
 element = window.elements[0]
-driver.wait.until { element.visible? }
+driver.wait_until { element.visible? }
 ```
 
 The default timeout is 1 second. You can specify a specific timeout and the interval to wait between retries:
 
 ```ruby
-driver.wait(timeout: 10, interval: 0.3).until { element.visible? }
+driver.wait_until(timeout: 10, interval: 0.3) { element.visible? }
 ```
 
 ### TODO

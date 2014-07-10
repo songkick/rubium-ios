@@ -13,11 +13,6 @@ module Appium
       @implicit_timeout = 1
     end
 
-    def implicit_timeout=(value)
-      @implicit_timeout = value
-      update_implicit_timeout(implicit_timeout)
-    end
-
     def launch(session_timeout = DEFAULT_SESSION_TIMEOUT)
       @session ||= Appium::Session.new(@host, @port, @capabilities, session_timeout)
       update_implicit_timeout(implicit_timeout)
@@ -47,26 +42,80 @@ module Appium
     def self.instruments_environment_variables(env)
       env.empty? ? "" : env.map { |key, value| "-e #{key} #{value}" }.join(" ")
     end
-
+    
+    ### @!group Managing timeouts
+    
+    # Sets the implicit timeout used by the underlying Selenium::WebDriver instance.
+    #
+    # Implicit timeouts are used when trying to find elements on the screen using the
+    # low-level #find and #find_all methods. They do not affect any remotely executed
+    # Javascript and therefore have no affect on code that uses the native Javascript
+    # proxy APIs.
+    #
+    # @param [Numeric] value The new timeout value, in seconds
+    # 
+    def implicit_timeout=(value)
+      @implicit_timeout = value
+      update_implicit_timeout(implicit_timeout)
+    end
+    
+    # Temporarily sets the implicit timeout to the given value and invokes the block.
+    #
+    # After the block has been invoked, the original timeout will be restored.
+    #
+    # @param [Numeric] timeout The temporary timeout, in seconds
+    #
     def with_implicit_timeout(timeout, &block)
       update_implicit_timeout(timeout)
       yield
       update_implicit_timeout(implicit_timeout)
     end
 
+    # Returns the native Javascript API implicit timeout
+    # @see UIATarget.timeout()
+    #
     def native_timeout
       target.timeout
     end
 
+    # Sets the native Javascript API implicit timeout
+    # @param [Numeric] new_timeout The new timeout, in seconds
+    # @see UIATarget.setTimeout()
+    # 
     def native_timeout=(new_timeout)
       target.setTimeout(new_timeout)
     end
 
+    # Temporarily sets the native Javascript API implicit timeout by pushing a new
+    # timeout on to the timeout stack, calling the given block and then popping the
+    # timeout off the stack.
+    #
+    # @param [Numeric] value The temporary timeout, in seconds
+    # @see UIATarget.pushTimeout(), UIATarget.popTimeout()
+    #
     def with_native_timeout(value, &block)
       target.pushTimeout(value)
       yield if block_given?
       target.popTimeout
     end
+    
+    # Performs an explicit wait until the given block returns true.
+    #
+    # You can use this method to wait for an explicit condition to occur
+    # before continuing.
+    #
+    # @example
+    #     driver.wait_until { something_happened }
+    # 
+    # @param [Numeric] timeout The explicit wait timeout, in seconds
+    # @param [Numeric] interval The interval to wait between retries.
+    # @yieldreturn [Boolean] The block will be repeatedly called up to the timeout until it returns true.
+    #
+    def wait_until(timeout: 1, interval: 0.2, &block)
+      Selenium::WebDriver::Wait.new(timeout: upto, interval: interval).until(&block)
+    end
+
+    ### @!endgroup
 
     def find(xpath)
       element_proxy_for driver.find_element(:xpath, xpath)
