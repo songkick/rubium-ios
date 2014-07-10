@@ -10,7 +10,7 @@ module Rubium
 
       @driver = Selenium::WebDriver.for(:remote,
         desired_capabilities: capabilities.to_hash,
-        url: "http://#{host}:#{port}#{Appium.root_path}",
+        url: "http://#{host}:#{port}#{Rubium.root_path}",
         http_client: client
       )
     rescue Errno::ECONNREFUSED
