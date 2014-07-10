@@ -26,7 +26,7 @@ module Appium
     #
     def launch(session_timeout = DEFAULT_SESSION_TIMEOUT)
       @session ||= Appium::Session.new(@host, @port, @capabilities, session_timeout)
-      update_implicit_timeout(implicit_timeout)
+      update_implicit_timeout
     end
 
     # Quits the current session, if there is one.
@@ -85,7 +85,7 @@ module Appium
     # 
     def implicit_timeout=(value)
       @implicit_timeout = value
-      update_implicit_timeout(implicit_timeout)
+      update_implicit_timeout
     end
     
     # Temporarily sets the implicit timeout to the given value and invokes the block.
@@ -97,7 +97,7 @@ module Appium
     def with_implicit_timeout(timeout, &block)
       update_implicit_timeout(timeout)
       yield
-      update_implicit_timeout(implicit_timeout)
+      update_implicit_timeout
     end
 
     # Returns the native Javascript API implicit timeout
@@ -195,7 +195,7 @@ module Appium
 
     private
 
-    def update_implicit_timeout(value)
+    def update_implicit_timeout(value = implicit_timeout)
       driver.manage.timeouts.implicit_wait = value if @session
     end
     
