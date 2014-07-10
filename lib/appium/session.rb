@@ -13,10 +13,14 @@ module Appium
         url: "http://#{host}:#{port}#{Appium.root_path}",
         http_client: client
       )
+    rescue Errno::ECONNREFUSED
+      raise ConnectionError
     end
 
     def terminate
       @driver.quit rescue nil
     end
+    
+    class ConnectionError < RuntimeError; end
   end
 end
