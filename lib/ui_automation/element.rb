@@ -1,5 +1,3 @@
-require 'wrong'
-
 module UIAutomation
   # Represents objects of type UIAElement in the Javascript API.
   #
@@ -8,9 +6,6 @@ module UIAutomation
   # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAElementClassReference/
   class Element < RemoteProxy
     extend UIAutomation::ElementDefinitions
-
-    include Wrong::Assert
-    include Wrong::Eventually
 
     # The proxy for the parent element
     # @note This returns the existing proxy that created this one; it does not use the UIAElement.parent() method
@@ -188,13 +183,13 @@ module UIAutomation
     #
     # @param [List<Symbol>] predicates One or more symbols representing boolean methods defined on the current class.
     # @yieldparam [self] element
-    # @raise [Wrong::Assert::AssertionFailedError] if all predicates do not return true within the default timeout.
+    # @raise [Appium::IOSDriver::TimeoutError] if all predicates do not return true within the default timeout.
     #
     # @example Tap the element once it is selected and has keyboard focus
     #     element.when_element(:selected?, :has_keyboard_focus?) { |el| el.tap }
     #
     def when_element(*predicates, &block)
-      eventually do
+      driver.wait_until do
         predicates.all? { |p| __send__(p) }
       end
 
@@ -214,14 +209,14 @@ module UIAutomation
     #
     # @param [List<Symbol>] predicates One or more symbols representing boolean methods defined on the current class.
     # @yieldparam [self] element
-    # @raise [Wrong::Assert::AssertionFailedError] if all predicates do not return true within the default timeout.
+    # @raise [Appium::IOSDriver::TimeoutError] if all predicates do not return true within the default timeout.
     #
     # @example Scroll the table view until a specific cell is visible
     #     expected_cell = table_view.cells['Some Name']
     #     expected_cell.until_element(:visible?) { table_view.scroll_down }
     #
     def until_element(*predicates, &block)
-      eventually do
+      driver.wait_until do
         if predicates.all? { |p| __send__(p) }
           true
         else

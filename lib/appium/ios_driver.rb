@@ -22,7 +22,7 @@ module Appium
     # in turn will launch your application in the simulator or on your device.
     #
     # @param [Numeric] session_timeout the underlying HTTP session timeout, in seconds
-    # @raise Appium::Session::ConnectionError if could not connect to the server.
+    # @raise [Appium::Session::ConnectionError] if could not connect to the server.
     #
     def launch(session_timeout = DEFAULT_SESSION_TIMEOUT)
       @session ||= Appium::Session.new(@host, @port, @capabilities, session_timeout)
@@ -51,7 +51,7 @@ module Appium
     # the block raises an exception.
     #
     # @param [Numeric] session_timeout the underlying HTTP session timeout, in seconds
-    # @raise RuntimeError if a session is already running
+    # @raise [RuntimeError] if a session is already running
     #
     def with_session(session_timeout = DEFAULT_SESSION_TIMEOUT, &block)
       raise "Session already running!" if @session
@@ -128,6 +128,8 @@ module Appium
       target.pop_timeout
     end
     
+    class TimeoutError < RuntimeError; end
+    
     # Performs an explicit wait until the given block returns true.
     #
     # You can use this method to wait for an explicit condition to occur
@@ -139,9 +141,12 @@ module Appium
     # @param [Numeric] timeout The explicit wait timeout, in seconds
     # @param [Numeric] interval The interval to wait between retries.
     # @yieldreturn [Boolean] The block will be repeatedly called up to the timeout until it returns true.
+    # @raise [Appium::IOSDriver::TimeoutError] if the wait times out
     #
     def wait_until(timeout: 1, interval: 0.2, &block)
-      Selenium::WebDriver::Wait.new(timeout: upto, interval: interval).until(&block)
+      Selenium::WebDriver::Wait.new(timeout: timeout, interval: interval).until(&block)
+    rescue Selenium::WebDriver::Error::TimeOutError => e
+      raise TimeoutError.new(e.message)
     end
 
     ### @!endgroup
@@ -183,7 +188,7 @@ module Appium
     # Executes a string of Javascript within the Instruments process.
     #
     # @param [String] script the Javascript to be executed.
-    # @raise Selenium::WebDriver::Error::JavascriptError if the evaluated Javascript errors.
+    # @raise [Selenium::WebDriver::Error::JavascriptError] if the evaluated Javascript errors.
     # @note This method will always return immediately in the case of an error, regardless of# any implicit or native timeout set. If you need to execute some Javascript until it is  successful, you should consider using an explicit wait.
     #
     def execute_script(script)
