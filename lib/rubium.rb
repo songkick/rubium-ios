@@ -1,4 +1,4 @@
-module Appium
+module Rubium
   class << self
     def default_host
       'localhost'
@@ -13,3 +13,9 @@ module Appium
     end
   end
 end
+
+require 'ui_automation'
+require 'ui_automation/element_proxy_methods'
+require 'rubium'
+require 'rubium/driver'
+require 'rubium/capabilities'

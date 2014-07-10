@@ -55,16 +55,16 @@ You also need to compile your app (for the simulator in this example) and put th
 
 Appium implements the Selenium web driver protocol and this library is built on top of the Ruby Selenium::WebDriver client, but it abstracts most of those details away from you.
 
-The `Appium::IOSDriver` class is the class that lets you launch and terminate a remote Instruments session (which will trigger your app to launch automatically). It also lets you configure things like timeouts and provides some lower level methods for finding elements using an xpath, executing Javascript directly and capturing screenshots. It also provides access to `UIAutomation::Target` which represents the `UIATarget` object in the Javascript API and is the root of the entire UIAutomation API.
+The `Rubium::Driver` class is the class that lets you launch and terminate a remote Instruments session (which will trigger your app to launch automatically). It also lets you configure things like timeouts and provides some lower level methods for finding elements using an xpath, executing Javascript directly and capturing screenshots. It also provides access to `UIAutomation::Target` which represents the `UIATarget` object in the Javascript API and is the root of the entire UIAutomation API.
 
-To initialise an instance of `Appium::IOSDriver`, you need to pass it the desired capabilities for your app. You can also pass in a hostname and port if you are running Appium on another machine or on a non-standard port.
+To initialise an instance of `Rubium::Driver`, you need to pass it the desired capabilities for your app. You can also pass in a hostname and port if you are running Appium on another machine or on a non-standard port.
 
 Capabilities define the behaviour of your session and tell Appium things like the path to your app, it's bundle ID and if you're running on a real device, the device UDID. A full list of capabilities can be viewed in the [Appium documentation](https://github.com/appium/appium/blob/master/docs/en/caps.md). 
 
-You can use the classes in `Appium::Capabilities` to create your driver capabilities. There are certain keys that are required, however most keys have sensible defaults so most of the time the minimum you will need to specify are the path to your app and your app's bundle ID.
+You can use the classes in `Rubium::Capabilities` to create your driver capabilities. There are certain keys that are required, however most keys have sensible defaults so most of the time the minimum you will need to specify are the path to your app and your app's bundle ID.
 
 ```ruby
-capabilities = Appium::Capabilities::Simulator.new do |caps|
+capabilities = Rubium::Capabilities::Simulator.new do |caps|
   caps.app = '/path/to/my/App.app'
   caps.bundle_id = 'com.example.MyApp'
 end
@@ -73,7 +73,7 @@ end
 If you want to test on a real device, you'll need to provide a path to an IPA file instead of a .app bundle (see Testing On a Real Device):
 
 ```ruby
-capabilities = Appium::Capabilities::Device.new do |caps|
+capabilities = Rubium::Capabilities::Device.new do |caps|
   caps.app = '/path/to/my/App.ipa'
   caps.bundle_id = 'com.example.MyApp'
   caps.udid = 'YOUR_DEVICE_UDID'
@@ -83,7 +83,7 @@ end
 You can now use these capabilities to create a driver:
 
 ```ruby
-driver = Appium::IOSDriver.new(capabilities)
+driver = Rubium::Driver.new(capabilities)
 ```
 
 ### Launching a session
@@ -188,7 +188,7 @@ You can specify a custom session timeout when you launch a session:
 
 ```ruby
 # use a 60 second session timeout instead
-driver = Appium::IOSDriver.new(capabilities)
+driver = Rubium::Driver.new(capabilities)
 driver.launch(60)
 ```
 
@@ -199,13 +199,13 @@ The command timeout is the length of time Appium will wait to receive a new comm
 The default value is 30 seconds, which should be plenty of time for most test scripts. One example of where you might want to set this to a higher value is if you are using an interactive console to debug your tests. You set the command timeout as part of your driver's capabilities using the `new_command_timeout` attribute:
 
 ```ruby
-capabilities = Appium::Capabilities::Simulator.new
+capabilities = Rubium::Capabilities::Simulator.new
 capabilities.new_command_timeout = 100
 ```
 
 ### Implicit timeouts
 
-Because `Appium::IOSDriver` uses `Selenium::WebDriver` under the hood, it supports its notion of an "implicit timeout". Implicit timeouts mean that any attempts to find an element will be repeated until the element is found or the timeout is reached.
+Because `Rubium::Driver` uses `Selenium::WebDriver` under the hood, it supports its notion of an "implicit timeout". Implicit timeouts mean that any attempts to find an element will be repeated until the element is found or the timeout is reached.
 
 Its important to note that implicit timeouts only affect driver methods such as `#find` or `#find_all`. They *do not* affect remote Javascript execution (such as when using the UIAutomation proxy API) and any Javascript errors will cause an immediate failure regardless of any implicit timeout that might be set.
 
@@ -215,11 +215,11 @@ Note: use of implicit timeouts is discouraged unless you really need to make use
 
 ### Native timeouts
 
-Native timeouts are a form of implicit timeout that are managed on the Instruments Javascript runtime side of the process and use the `UIATarget` methods `setTimeout()`, `pushTimeout()` and `popTimeout()` and are only applicable when using the Javascript proxy APIs or when calling `Appium::IOSDriver#execute` directly.
+Native timeouts are a form of implicit timeout that are managed on the Instruments Javascript runtime side of the process and use the `UIATarget` methods `setTimeout()`, `pushTimeout()` and `popTimeout()` and are only applicable when using the Javascript proxy APIs or when calling `Rubium::Driver#execute` directly.
 
 The advantage of native timeouts over implicit driver timeouts or explicit timeouts is that they only ever require a single request to the Appium server - the Javascript statement will be executed once and will wait to return up to the timeout. The most typical use case is if you need to interact with an element in some way (such as tapping it) but it might not yet be valid (as you might be in the middle of a screen transition).
 
-Whilst you can call `#set_timeout`, `#push_timeout` and `#pop_timeout` directly on the target proxy, you can also use the `Appium::IOSDriver` methods `#native_timeout=` and `#with_native_timeout`. The former will set the timeout permanently, the latter will push a new timeout value, invoke a Ruby block and then pop the timeout again.
+Whilst you can call `#set_timeout`, `#push_timeout` and `#pop_timeout` directly on the target proxy, you can also use the `Rubium::Driver` methods `#native_timeout=` and `#with_native_timeout`. The former will set the timeout permanently, the latter will push a new timeout value, invoke a Ruby block and then pop the timeout again.
 
 Whenever you're dealing with elements using the proxy API, native timeouts should be your preferred means of handling delays.
 

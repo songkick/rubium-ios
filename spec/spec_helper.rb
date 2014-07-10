@@ -25,4 +25,4 @@ RSpec.configure do |config|
 end
 
 require 'support/matchers'
-require 'appium_ios_driver'
+require 'rubium'

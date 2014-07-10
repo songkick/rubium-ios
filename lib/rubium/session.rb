@@ -1,6 +1,6 @@
 require 'selenium-webdriver'
 
-module Appium
+module Rubium
   class Session
     attr_reader :driver
 

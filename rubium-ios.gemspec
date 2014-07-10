@@ -1,15 +1,15 @@
 # encoding: utf-8
 
 $:.unshift File.expand_path('../lib', __FILE__)
-require 'version'
+require 'rubium/version'
 
 Gem::Specification.new do |s|
-  s.name          = "appium-ios-driver"
-  s.version       = Appium::Gem::VERSION
+  s.name          = "rubium-ios"
+  s.version       = Rubium::Version.to_s
   s.authors       = ["Luke Redpath"]
   s.email         = ["luke@lukeredpath.co.uk"]
-  s.homepage      = "https://github.com/lukeredpath/appium-ios-driver"
-  s.summary       = "A Ruby library for driving your Appium iOS automated tests"
+  s.homepage      = "https://github.com/songkick/rubium-ios"
+  s.summary       = "A Ruby library for driving your iOS automated tests using Appium"
   s.files         = `git ls-files app lib`.split("\n")
   s.platform      = Gem::Platform::RUBY
   s.require_paths = ['lib']

@@ -1,4 +1,4 @@
-module Appium
+module Rubium
   module Capabilities
     class Base
       LATEST_SDK_VERSION = '7.1'

@@ -1,13 +1,13 @@
-require 'appium/session'
+require 'rubium/session'
 
-module Appium
-  class IOSDriver
+module Rubium
+  class Driver
     attr_accessor :implicit_timeout
     
     # The default session timeout, in seconds
     DEFAULT_SESSION_TIMEOUT = 30
 
-    def initialize(capabilities, host = Appium.default_host, port = Appium.default_port)
+    def initialize(capabilities, host = Rubium.default_host, port = Rubium.default_port)
       @capabilities = capabilities
       @host = host
       @port = port
@@ -22,10 +22,10 @@ module Appium
     # in turn will launch your application in the simulator or on your device.
     #
     # @param [Numeric] session_timeout the underlying HTTP session timeout, in seconds
-    # @raise [Appium::Session::ConnectionError] if could not connect to the server.
+    # @raise [Rubium::Session::ConnectionError] if could not connect to the server.
     #
     def launch(session_timeout = DEFAULT_SESSION_TIMEOUT)
-      @session ||= Appium::Session.new(@host, @port, @capabilities, session_timeout)
+      @session ||= Rubium::Session.new(@host, @port, @capabilities, session_timeout)
       update_implicit_timeout
     end
 
@@ -141,7 +141,7 @@ module Appium
     # @param [Numeric] timeout The explicit wait timeout, in seconds
     # @param [Numeric] interval The interval to wait between retries.
     # @yieldreturn [Boolean] The block will be repeatedly called up to the timeout until it returns true.
-    # @raise [Appium::IOSDriver::TimeoutError] if the wait times out
+    # @raise [Rubium::Driver::TimeoutError] if the wait times out
     #
     def wait_until(timeout: 1, interval: 0.2, &block)
       Selenium::WebDriver::Wait.new(timeout: timeout, interval: interval).until(&block)

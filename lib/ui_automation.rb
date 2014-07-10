@@ -6,7 +6,7 @@ module UIAutomation
   # Javascript within the Instruments runtime environment.
   #
   # Rather than having to manual build strings of Javascript using the Apple UIAutomation
-  # API and executing them using Appium::IOSDriver#execute, you can use a RemoteProxy as 
+  # API and executing them using Rubium::Driver#execute, you can use a RemoteProxy as 
   # if it was an instance of a Javascript object within the UIAutomation API.
   #
   # You can fetch values of properties, perform methods and obtain new proxies to objects
@@ -23,7 +23,7 @@ module UIAutomation
   # of this class.
   #
   # @example Fetch the 'model' from the local target
-  #     executor = Appium::IOSDriver.new(capabilities)
+  #     executor = Rubium::Driver.new(capabilities)
   #     target = UIAutomation::RemoteProxy.new(executor, "UIATarget.localTarget()")
   #     puts target.model # => 'iOS Simulator'
   #
@@ -44,7 +44,7 @@ module UIAutomation
 
     # Creates a new RemoteProxy instance.
     #
-    # Generally, the executor param will be an instance of `Appium::IOSDriver` but it 
+    # Generally, the executor param will be an instance of `Rubium::Driver` but it 
     # can be any object that responds to `#execute(string)` and is able to execute the
     # Javascript remotely using the Selenium web-driver protocol.
     #
@@ -77,7 +77,7 @@ module UIAutomation
     # query and should not be used directly.
     #
     # @see #initialize
-    # @see Appium::IOSDriver#find
+    # @see Rubium::Driver#find
     #
     def self.from_element_id(executor, element_id, *args)
       new(executor, RemoteObjectByElementID.new(element_id), *args)

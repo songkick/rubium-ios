@@ -5,7 +5,7 @@
 #
 # You will need the pry and pry-byebug gems installed to run this example.
 #
-require 'appium_ios_driver'
+require 'rubium'
 require 'pry-byebug'
 
 ### CUSTOMISE THIS SECTION
@@ -22,7 +22,7 @@ COMMAND_TIMEOUT = 600 # 10 minutes
 ### END CUSTOMISATION
 
 # define the capabilities for our appium session
-capabilities = Appium::Capabilities::Simulator.new do |capabilities|
+capabilities = Rubium::Capabilities::Simulator.new do |capabilities|
   capabilities.device_name = 'iPhone Simulator'
   capabilities.app = APP_PATH
   capabilities.bundle_id = APP_BUNDLE_ID
@@ -31,7 +31,7 @@ capabilities = Appium::Capabilities::Simulator.new do |capabilities|
 end
 
 # create the driver
-driver = Appium::IOSDriver.new(capabilities)
+driver = Rubium::Driver.new(capabilities)
 
 # start the session
 puts "Starting Appium session..."
