@@ -27,7 +27,6 @@ module Appium
     def launch(session_timeout = DEFAULT_SESSION_TIMEOUT)
       @session ||= Appium::Session.new(@host, @port, @capabilities, session_timeout)
       update_implicit_timeout(implicit_timeout)
-      self.native_timeout = implicit_timeout
     end
 
     # Quits the current session, if there is one.
