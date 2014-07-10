@@ -4,6 +4,7 @@ module Appium
   class IOSDriver
     attr_accessor :implicit_timeout
     
+    # The default session timeout, in seconds
     DEFAULT_SESSION_TIMEOUT = 30
 
     def initialize(capabilities, host = Appium.default_host, port = Appium.default_port)
@@ -12,18 +13,47 @@ module Appium
       @port = port
       @implicit_timeout = 1
     end
+    
+    ### @!group Session Management
 
+    # Launches a new Appium session.
+    #
+    # Launching a new Appium session will cause Appium to launch Instruments, which 
+    # in turn will launch your application in the simulator or on your device.
+    #
+    # @param [Numeric] session_timeout the underlying HTTP session timeout, in seconds
+    # @raise Appium::Session::ConnectionError if could not connect to the server.
+    #
     def launch(session_timeout = DEFAULT_SESSION_TIMEOUT)
       @session ||= Appium::Session.new(@host, @port, @capabilities, session_timeout)
       update_implicit_timeout(implicit_timeout)
       self.native_timeout = implicit_timeout
     end
 
+    # Quits the current session, if there is one.
+    #
+    # When you quit a session, Appium will terminate the Instruments process which will 
+    # in turn kill the iOS simulator or remove the app from your device.
+    #
     def quit
       @session.terminate if @session
       @session = nil
     end
 
+    # Launches a new session, calls the given block, then quits.
+    #
+    # This method lets you treat a session as a transaction, with the given block being
+    # executed after launching then quitting the session when the block returns. 
+    #
+    # Using this method ensures you do not have to explicitly quit the session when you
+    # are finished.
+    #
+    # This method will quit the session after the block has finished executing, even if
+    # the block raises an exception.
+    #
+    # @param [Numeric] session_timeout the underlying HTTP session timeout, in seconds
+    # @raise RuntimeError if a session is already running
+    #
     def with_session(session_timeout = DEFAULT_SESSION_TIMEOUT, &block)
       raise "Session already running!" if @session
       launch(session_timeout)
@@ -34,10 +64,14 @@ module Appium
       end
     end
 
+    # Quits any existing session before launching a new one.
+    #
     def relaunch
       quit
       launch
     end
+
+    ### @!endgroup
 
     def self.instruments_environment_variables(env)
       env.empty? ? "" : env.map { |key, value| "-e #{key} #{value}" }.join(" ")
@@ -130,19 +164,39 @@ module Appium
     def capture_screenshot(output_file, format = :png)
       File.open(output_file, 'wb') { |io| io.write driver.screenshot_as(format) }
     end
-
+    
+    ### @!group Javascript Proxy Methods
+    
+    # Returns a proxy to the local target (UIATarget).
+    #
+    # This method is the main entry point into the UIAutomation Javascript proxy API.
+    # The local target is the root object in the UIAutomation object graph.
+    #
+    # @return [UIAutomation::Target] A proxy to the local target (UIATarget.localTarget())
+    #
     def target
       @target ||= UIAutomation::Target.local_target(self)
     end
 
+    # Returns a proxy to the native UIAutomation logger.
+    #
+    # @return [UIAutomation::Logger] 
     def logger
       @logger ||= UIAutomation::Logger.logger(self)
     end
     
+    # Executes a string of Javascript within the Instruments process.
+    #
+    # @param [String] script the Javascript to be executed.
+    # @raise Selenium::WebDriver::Error::JavascriptError if the evaluated Javascript errors.
+    # @note This method will always return immediately in the case of an error, regardless of# any implicit or native timeout set. If you need to execute some Javascript until it is  successful, you should consider using an explicit wait.
+    #
     def execute_script(script)
       driver.execute_script(script)
     end
     alias :execute :execute_script
+
+    ### @!endgroup
 
     private
 
