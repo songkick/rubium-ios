@@ -180,6 +180,8 @@ module UIAutomation
     # to represent the main application, you would initialize this with 
     # the string 'UIATarget.currentTarget().frontMostApp()'
     #
+    # @api private
+    #
     class RemoteJavascriptObject
       def initialize(javascript)
         @javascript = javascript
@@ -228,6 +230,8 @@ module UIAutomation
     # This allows us to construct remote proxies to javascript objects that are found
     # using e.g. an xpath without having to know the actual index path to the object
     # in the UIAutomation javascript object tree.
+    #
+    # @api private
     #
     class RemoteObjectByElementID < RemoteJavascriptObject
       def initialize(object_id)
