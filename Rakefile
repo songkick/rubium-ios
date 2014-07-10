@@ -16,6 +16,11 @@ namespace :docs do
   YARD::Rake::YardocTask.new(:generate) do |t|
     t.files = ['lib/**/*.rb']
   end
+  
+  desc "Start a local yard server"
+  task :serve do
+    sh "yard server -r -e yard_ext.rb"
+  end
 end
 
 task :default => :specs
