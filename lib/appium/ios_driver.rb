@@ -72,10 +72,6 @@ module Appium
     end
 
     ### @!endgroup
-
-    def self.instruments_environment_variables(env)
-      env.empty? ? "" : env.map { |key, value| "-e #{key} #{value}" }.join(" ")
-    end
     
     ### @!group Managing timeouts
     
