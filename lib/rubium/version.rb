@@ -1,11 +1,16 @@
 module Rubium
   module Version
-    MAJOR = 0
+    MAJOR = 1
     MINOR = 0
-    TINY  = 1
+    TINY  = 0
 
     def self.to_s
-      [MAJOR, MINOR, TINY].join(".")
+      version = [MAJOR, MINOR, TINY].join(".")
+      prerelease ? "#{version}.pre" : version
+    end
+    
+    def self.prerelease
+      true
     end
   end
 end
