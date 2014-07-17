@@ -282,6 +282,10 @@ module UIAutomation
       @remote_object
     end
     
+    def executor
+      @executor
+    end
+    
     def build_proxy(proxy_klass, remote_object, proxy_args)
       proxy_klass.new(@executor, remote_object, *proxy_args)
     end
