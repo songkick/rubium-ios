@@ -35,7 +35,7 @@ module UIAutomation
     end
 
     def inspect
-      "<RemoteProxy(#{self.class.name}) type:#{element_proxy_for}: #{to_javascript}>"
+      "<RemoteProxy(#{self.class.name}) type:#{element_klass}: #{to_javascript}>"
     end
     
     ### @!group Accessing Elements    
