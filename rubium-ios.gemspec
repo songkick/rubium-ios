@@ -21,5 +21,5 @@ Gem::Specification.new do |s|
 
   # runtime dependencies (used to generate Gemfile)
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.42.0'
-  s.add_runtime_dependency 'activesupport', '~> 4.0'
+  s.add_runtime_dependency 'activesupport', '~> 3.0'
 end
