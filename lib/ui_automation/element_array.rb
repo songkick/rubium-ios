@@ -27,8 +27,8 @@ module UIAutomation
     attr_reader :element_klass
 
     # @api private
-    def initialize(driver, remote_object, element_klass = UIAutomation::Element, parent_element = nil, window = nil)
-      super driver, remote_object
+    def initialize(executor, remote_object, element_klass = UIAutomation::Element, parent_element = nil, window = nil)
+      super executor, remote_object
       @element_klass = element_klass
       @parent = parent_element
       @window = window

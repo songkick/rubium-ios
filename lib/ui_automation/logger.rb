@@ -4,8 +4,8 @@ module UIAutomation
   # @see https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIALoggerClassReference/
   #
   class Logger < RemoteProxy
-    def self.logger(driver)
-      from_javascript(driver, 'UIALogger')
+    def self.logger(executor)
+      from_javascript(executor, 'UIALogger')
     end
     
     def start(message)

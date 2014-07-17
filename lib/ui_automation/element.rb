@@ -121,8 +121,8 @@ module UIAutomation
     # As well as the parameters of its super-class, it also takes a parent element and window proxy.
     # @api private
     #
-    def initialize(driver, remote_object, parent_element, window = nil)
-      super driver, remote_object
+    def initialize(executor, remote_object, parent_element, window = nil)
+      super executor, remote_object
       @parent = parent_element
       @window = window
     end
@@ -189,7 +189,7 @@ module UIAutomation
     #     element.when_element(:selected?, :has_keyboard_focus?) { |el| el.tap }
     #
     def when_element(*predicates, &block)
-      driver.wait_until do
+      executor.wait_until do
         predicates.all? { |p| __send__(p) }
       end
 
@@ -213,7 +213,7 @@ module UIAutomation
     #     expected_cell.until_element(:visible?) { table_view.scroll_down }
     #
     def until_element(*predicates, &block)
-      driver.wait_until do
+      executor.wait_until do
         if predicates.all? { |p| __send__(p) }
           true
         else
