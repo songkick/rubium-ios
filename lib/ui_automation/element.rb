@@ -194,9 +194,6 @@ module UIAutomation
       end
 
       yield self if block_given?
-
-    rescue Wrong::Assert::AssertionFailedError => e
-      raise Wrong::Assert::AssertionFailedError.new("Expect #{self} #{predicates.join(", ")}")
     end
     alias :when_element_is :when_element
 
