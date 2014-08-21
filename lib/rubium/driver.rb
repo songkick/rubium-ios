@@ -143,7 +143,7 @@ module Rubium
     # @yieldreturn [Boolean] The block will be repeatedly called up to the timeout until it returns true.
     # @raise [Rubium::Driver::TimeoutError] if the wait times out
     #
-    def wait_until(timeout: 1, interval: 0.2, &block)
+    def wait_until(timeout: 10, interval: 0.2, &block)
       Selenium::WebDriver::Wait.new(timeout: timeout, interval: interval).until(&block)
     rescue Selenium::WebDriver::Error::TimeOutError => e
       raise TimeoutError.new(e.message)

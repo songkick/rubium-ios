@@ -232,7 +232,7 @@ module UIAutomation
     # @see #tap!
     #
     def tap # define this explicitly due to conflict with Object#tap
-      when_element_is(:valid?, :visible?) { tap! }
+      when_element_is(:valid?, :visible?, :enabled?) { tap! }
     end
 
     # Performs a single tap on the element without waiting.
