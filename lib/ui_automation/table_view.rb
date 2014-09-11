@@ -12,6 +12,9 @@ module UIAutomation
     # ALl of the visible cells in the table view
     has_element_array :visibleCells
 
+    # All of the group elements in the table view
+    has_element_array :groups
+
     ### @!endgroup
     
     ### @!group Actions
