@@ -1,7 +1,7 @@
 module Rubium
   module Capabilities
     class Base
-      LATEST_SDK_VERSION = '7.1'
+      LATEST_SDK_VERSION = '8.1'
       
       attr_accessor :platform_name
       attr_accessor :platform_version
